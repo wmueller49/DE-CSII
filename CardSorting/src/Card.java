@@ -6,10 +6,10 @@
 
 import java.util.*;
 
-public class Card implements Comparable {
+public class Card {
 
-	private String suit;
-	private String rank;
+	private static String suit;
+	private static String rank;
 	
 	/**
 	 * 
@@ -25,28 +25,12 @@ public class Card implements Comparable {
 	}
 	
 	public Card(String s, String r) {
-		if(isSuit(s)) {
-			suit = s;
-		}
-		else {
-			suit = "Spades";
-		}
-		
-		if(isRank(r)) {
-			rank = r;
-		}
-		else {
-			rank = "Ace";
-		}
+		suit = s;
+		rank = r;
 	}
 	
 	public Card(String s, int r) {
-		if(isSuit(s)) {
-			suit = s;
-		}
-		else {
-			suit = "Spades";
-		}
+		suit = s;
 		setRankInt(r);
 	}
 	
@@ -55,12 +39,9 @@ public class Card implements Comparable {
 		if(isRank(r)) {
 			rank = r;
 		}
-		else {
-			rank = "Ace";
-		}
 	}
 	
-	public void setSuitInt(int s){
+	public static void setSuitInt(int s){
 			switch (s) {
 			case(0):
 				suit = "Clubs";
@@ -77,7 +58,7 @@ public class Card implements Comparable {
 		}
 	}
 	
-	public void setRankInt(int r) {
+	public static void setRankInt(int r) {
 		switch (r) {
 			case(1):
 				rank = "Ace";
@@ -120,15 +101,15 @@ public class Card implements Comparable {
 		}
 	}
 	
-	public String getSuitStr() {
+	public static String getSuitStr() {
 		return suit;
 	}
 	
-	public String getRankStr() {
+	public static String getRankStr() {
 		return rank;
 	}
 	
-	public int getSuitInt() {
+	public static int getSuitInt() {
 		switch(suit.toLowerCase()) {
 		 case("clubs"):
 			 return 0;
@@ -142,7 +123,7 @@ public class Card implements Comparable {
 		return -1;
 	}
 	
-	public int getRankInt() {
+	public static int getRankInt() {
 		switch(rank.toLowerCase()) {
 			case("ace"):
 				return 1;
@@ -224,36 +205,26 @@ public class Card implements Comparable {
 		return getRankStr() + " of " + getSuitStr();
 	}
 	
-	public boolean equals(Object o) {
-		if(o instanceof Card) {
-			Card objectCard = (Card) o;
-			if(this.getRankInt() == objectCard.getRankInt() && this.getSuitInt() == objectCard.getSuitInt()) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	public int compareTo(Object o) {
-		if(o instanceof Card) {
-			Card objectCard = (Card) o;
-			return (this.getRankStr().compareTo((String)objectCard.getRankStr()));
-		}
-		return -1;
-	}
-	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
 		
-		Card card1 = new Card("pizza", "thing");
-		Card card2 = new Card("Diamonds", "King");
-		Card card3 = new Card("Spades", "Ace");
+		Card card1 = new Card();
+		System.out.println(card1.toString());
 		
-		System.out.println(card2.compareTo(card3));
+		Card card2 = new Card(2, 9);
+		System.out.println(card2.toString());
 		
+		Card card3 = new Card("Spades", 3);
+		System.out.println(card3.toString());
+		
+		Card card4 = new Card(1, "Nine");
+		System.out.println(card4.toString());
+		
+		Card card5 = new Card("Clubs", "King");
+		System.out.println(card5.toString());
 		
 	}
 
