@@ -32,7 +32,7 @@ public class Deck {
 	}
 	
 	public void shuffle() {
-		int randNum;
+		int randNum = 0;
 		Card tempCard;
 		for(int i = 0; i < this.deck.length; i++) {
 			tempCard = deck[i];

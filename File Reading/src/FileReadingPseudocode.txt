@@ -1,0 +1,64 @@
+class FileReading
+
+	Fields:
+		String outputPath = output.txt;
+		String replacementWords;
+		ArrayList<String> wordReplaceList = new ArrayList<String>;
+		boolean hasReplaceList;
+		
+	Methods:
+		bracesBalanced(String f1)
+			int openBraces = 0;
+			int closeBraces = 0;
+		
+			tries to open f1 if possible
+				if not, prints Part 1: Unable to Open file in output.txt
+			while f1 has another string
+				read it
+				if an openbrace
+					openBrace++
+				if closeBrace
+					closeBrace++
+			
+			prints Braces balanced in output.txt if closeBraces = openBraces
+			prints Braces not balanced in output.txt if closeBraces != openBraces
+			
+		identicalFiles(String f1, f2)
+			Tries to open both f1 and f2 if possible
+				if not, prints Part 2: Unable to open file in output.txt
+			
+			while both f1 and f2 have another string and those strings are equivalent
+				it continues reading the strings
+			
+			if either file still has more text
+				add Files not identical to output.txt
+			
+			otherwise,
+				add Files Identical
+				
+		shortStory(f3)
+			tries to open f3 if possible
+				if not, prints Part 3: Unable to open file in output.txt
+				
+			if there is no replaceList and the next word starts with < and ends with >
+				prompts the user for a word then adds it to the arraylist wordReplaceList
+			
+			reads through the file again
+				if it isn't the end of a line, prints the word from the stream
+				if it has a < or >, then that word is replaced with the nth term in wordReplaceList, n being however many such words have been found
+				if it is the end of a line, inserts a new line into output.txt
+				
+		main
+			asks for three files, f1, f2, and f3
+		 	asks for a file with replacement words that will replace the story words
+		 		if no words, the user will be prompted
+		 		if some words, the user will be prompted when the extra words are needed
+		 		
+				
+			
+			
+			
+			
+			
+		
+		

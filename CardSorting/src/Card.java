@@ -25,12 +25,27 @@ public class Card {
 	}
 	
 	public Card(String s, String r) {
-		suit = s;
-		rank = r;
+		if(isSuit(s)) {
+			suit = s;
+		}
+		else {
+			suit = "Spades";
+		}
+		if(isRank(r)) {
+			rank = r;
+		}
+		else {
+			rank = "Ace";
+		}
 	}
 	
 	public Card(String s, int r) {
-		suit = s;
+		if(isSuit(s)) {
+			suit = s;
+		}
+		else {
+			suit = "Spades";
+		}
 		setRankInt(r);
 	}
 	
@@ -38,6 +53,9 @@ public class Card {
 		setSuitInt(s);
 		if(isRank(r)) {
 			rank = r;
+		}
+		else {
+			rank = "Ace";
 		}
 	}
 	
@@ -223,7 +241,7 @@ public class Card {
 		Card card4 = new Card(1, "Nine");
 		System.out.println(card4.toString());
 		
-		Card card5 = new Card("Clubs", "King");
+		Card card5 = new Card("Clubs", "Lion");
 		System.out.println(card5.toString());
 		
 	}
