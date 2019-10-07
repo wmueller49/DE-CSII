@@ -5,25 +5,48 @@
  */
 
 import java.util.*;
+import java.lang.Comparable;
 
-public class Card {
+public class Card implements Comparable {
+	
+	/*
+	 * Fields
+	 */
 
-	private static String suit;
-	private static String rank;
+	private String suit;
+	private String rank;
 	
 	/**
-	 * 
+	 * Constructors
+	 */
+	
+	/*
+	 * Default Constructor creates an Ace of Spades
 	 */
 	public Card() {
 		suit = "Spades";
 		rank = "Ace";
 	}
 	
+	/*
+	 * Constructor which copies a card
+	 */
+	public Card(Card c) {
+		suit = c.getSuitStr();
+		rank = c.getRankStr();
+	}
+	
+	/*
+	 * Constructor takes in two integer values to create a card
+	 */
 	public Card(int s, int r) {
 		setSuitInt(s);
 		setRankInt(r);
 	}
 	
+	/*
+	 * Constructor takes in two String values to create a card
+	 */
 	public Card(String s, String r) {
 		if(isSuit(s)) {
 			suit = s;
@@ -39,6 +62,9 @@ public class Card {
 		}
 	}
 	
+	/*
+	 * Constructor takes in a String and int value to create a card
+	 */
 	public Card(String s, int r) {
 		if(isSuit(s)) {
 			suit = s;
@@ -49,6 +75,9 @@ public class Card {
 		setRankInt(r);
 	}
 	
+	/*
+	 * Constructor takes in a String and int value to create a card
+	 */
 	public Card(int s, String r) {
 		setSuitInt(s);
 		if(isRank(r)) {
@@ -58,8 +87,14 @@ public class Card {
 			rank = "Ace";
 		}
 	}
+	/*
+	 * Methods
+	 */
 	
-	public static void setSuitInt(int s){
+	/*
+	 * Sets the suit using an integer
+	 */
+	public void setSuitInt(int s){
 			switch (s) {
 			case(0):
 				suit = "Clubs";
@@ -76,10 +111,14 @@ public class Card {
 		}
 	}
 	
-	public static void setRankInt(int r) {
+	/*
+	 * sets the rank using an integer
+	 */
+	public void setRankInt(int r) {
 		switch (r) {
 			case(1):
 				rank = "Ace";
+				break;
 			case(2):
 				rank = "Two";
 				break;
@@ -119,15 +158,24 @@ public class Card {
 		}
 	}
 	
-	public static String getSuitStr() {
+	/*
+	 * returns the suit of the card as a string
+	 */
+	public String getSuitStr() {
 		return suit;
 	}
 	
-	public static String getRankStr() {
+	/*
+	 * returns the rank of the card as a string
+	 */
+	public String getRankStr() {
 		return rank;
 	}
 	
-	public static int getSuitInt() {
+	/*
+	 * returns the suit of the card as an integer
+	 */
+	public int getSuitInt() {
 		switch(suit.toLowerCase()) {
 		 case("clubs"):
 			 return 0;
@@ -141,7 +189,10 @@ public class Card {
 		return -1;
 	}
 	
-	public static int getRankInt() {
+	/*
+	 * returns the rank of the card as an integer
+	 */
+	public int getRankInt() {
 		switch(rank.toLowerCase()) {
 			case("ace"):
 				return 1;
@@ -173,6 +224,9 @@ public class Card {
 		return -1;
 	}
 	
+	/*
+	 * returns whether a string is a valid rank
+	 */
 	public boolean isRank(String r) {
 		switch(r.toLowerCase()) {
 			case("ace"):
@@ -205,6 +259,9 @@ public class Card {
 		return false;
 	}
 
+	/*
+	 * returns whether a string is a valid suit
+	 */
 	public boolean isSuit(String s) {
 		switch(s.toLowerCase()) {
 		 case("clubs"):
@@ -219,20 +276,38 @@ public class Card {
 		return false;
 	}
 	
+	/*
+	 * returns a string of "Rank" of "Suit"
+	 */
 	public String toString() {
 		return getRankStr() + " of " + getSuitStr();
 	}
 	
-	/**
-	 * @param args
+	/*
+	 * Returns whether two cards are equivalent
 	 */
+	public boolean equals(Card c) {
+		return this.rank.equals(c.rank) && this.suit.equals(c.rank);
+	}
+	
+	/*
+	 * Returns an integer to compare two cards
+	 */
+	public int compareTo(Object c) {
+		if(c instanceof Card) {
+			Card compareCard = new Card((Card)c);
+			return this.getRankInt() - compareCard.getRankInt();
+		}
+		return 0;
+	}
+	
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
 		
 		Card card1 = new Card();
 		System.out.println(card1.toString());
 		
-		Card card2 = new Card(2, 9);
+		Card card2 = new Card(2, 2);
 		System.out.println(card2.toString());
 		
 		Card card3 = new Card("Spades", 3);
