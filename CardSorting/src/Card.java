@@ -287,7 +287,7 @@ public class Card implements Comparable {
 	 * Returns whether two cards are equivalent
 	 */
 	public boolean equals(Card c) {
-		return this.rank.equals(c.rank) && this.suit.equals(c.rank);
+		return this.rank.equals(c.rank) && this.suit.equals(c.suit);
 	}
 	
 	/*
