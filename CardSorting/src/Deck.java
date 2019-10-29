@@ -24,6 +24,7 @@ public class Deck {
 	 */
 	public Deck() {
 		deck = new Card[52];
+		topCard = deck.length-1;
 		int s = 0;
 		int r = 1;
 		
@@ -42,6 +43,7 @@ public class Deck {
 	 */
 	public Deck(int n) {
 		deck = new Card[n];
+		topCard = deck.length-1;
 	}
 	
 	/*
@@ -49,6 +51,7 @@ public class Deck {
 	 */
 	public Deck(boolean b) {
 		deck = new Card[52];
+		topCard = deck.length-1;
 		int s = 0;
 		int r = 1;
 		
@@ -74,6 +77,9 @@ public class Deck {
 	 * Methods
 	 */
 	
+	public Card[] getDeck() {
+		return deck;
+	}
 	/*
 	 * shuffles the deck
 	 */
@@ -81,7 +87,7 @@ public class Deck {
 		int randNum = 0;
 		Card tempCard;
 		for(int i = 0; i < this.deck.length; i++) {
-			randNum = (int)Math.floor(Math.random()*52);
+			randNum = (int)Math.floor(Math.random()*deck.length);
 			tempCard = deck[i];
 			deck[i] = deck[randNum];
 			deck[randNum] = tempCard;
@@ -97,7 +103,7 @@ public class Deck {
 	public String toString() {
 		String result = "";
 		
-		if(deck.length == 52) {
+		if(topCard == 51) {
 			String cResult = "";
 			for(int i = 0; i < 52; i++) {
 				if(deck[i].getSuitInt() == 0) {
@@ -138,7 +144,7 @@ public class Deck {
 		
 		
 		else {
-			for(int i = 0; i < deck.length; i++) {
+			for(int i = 0; i <= topCard; i++) {
 				result = result + deck[i] + "\n";
 			}
 		}
@@ -178,8 +184,14 @@ public class Deck {
 	 * returns a random card from the deck
 	 */
 	public Card pick() {
+		topCard = deck.length-1;
 		int random = (int) Math.floor(Math.random() * 52);
-		return deck[random];
+		Card picked = new Card(deck[random]);
+		for(int i = random; i < deck.length - 1; i++) {
+			deck[i] = deck[i+1];
+		}
+		topCard--;
+		return picked;
 	}
 	
 	/*
@@ -187,6 +199,22 @@ public class Deck {
 	 */
 	public void add(Card c, int n) {
 		deck[n] = c;
+	}
+	
+	/*
+	 * sorts the deck using insertion sort
+	 */
+	public void insertionSort() {
+		for(int n = 1; n < deck.length; n++) {
+			Card temp = deck[n];
+			
+			int i = n;
+			while(i > 0 && temp.compareTo(deck[i-1]) < 0) {
+				deck[i] = deck[i-1];
+				i--;
+			}
+			deck[i] = temp;
+		}
 	}
 	
 	/*

@@ -287,7 +287,7 @@ public class Card implements Comparable {
 	 * Returns whether two cards are equivalent
 	 */
 	public boolean equals(Card c) {
-		return this.rank.equals(c.rank) && this.suit.equals(c.rank);
+		return this.rank.equals(c.rank) && this.suit.equals(c.suit);
 	}
 	
 	/*
@@ -304,20 +304,11 @@ public class Card implements Comparable {
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
 		
-		Card card1 = new Card();
+		Card card1 = new Card("Spades", "Ace");
 		System.out.println(card1.toString());
-		
-		Card card2 = new Card(2, 2);
-		System.out.println(card2.toString());
-		
-		Card card3 = new Card("Spades", 3);
-		System.out.println(card3.toString());
-		
-		Card card4 = new Card(1, "Nine");
-		System.out.println(card4.toString());
-		
-		Card card5 = new Card("Clubs", "Lion");
-		System.out.println(card5.toString());
+		Card card2 = new Card("Diamonds", 9);
+		System.out.println(card2);
+		System.out.println(card1.toString());
 		
 	}
 
