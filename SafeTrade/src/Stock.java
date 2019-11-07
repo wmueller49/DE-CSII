@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.PriorityQueue;
 import java.text.DecimalFormat;
 
@@ -226,3 +227,83 @@ public class Stock
     }
   }
 }
+=======
+<<<<<<< HEAD
+import java.util.*;
+
+public class Stock{
+
+   public static java.text.DecimalFormat money;
+   private String symbol;
+   private String name;
+   private double price;
+   private double lowPrice;
+   private double highPrice;
+   
+   private PriorityQueue<TradeOrder> sellOrders;
+   private PriorityQueue<TradeOrder> buyOrders;
+   
+   public Stock(String s, String n, double p){
+      symbol = s;
+      name = n;
+      price = p;
+   }
+
+   public String getQuote(){
+      return "Hello";
+   }
+   
+   public void placeOrder(TradeOrder order){
+      if(order.isBuy()){
+         buyOrders.add(order);
+         order.getTrader().receiveMessage("New order:  Buy " + order.getSymbol() + "\n" + order.getShares() + " shares at " + order.getPrice());
+      }
+      else{
+         sellOrders.add(order);
+         order.getTrader().receiveMessage("New order:  Sell " + order.getSymbol() + "\n" + order.getShares() + " shares at market");
+      }
+      
+   }
+
+
+=======
+import java.util.*;
+
+public class Stock{
+
+   public static java.text.DecimalFormat money;
+   private String symbol;
+   private String name;
+   private double price;
+   private double lowPrice;
+   private double highPrice;
+   
+   private PriorityQueue<TradeOrder> sellOrders;
+   private PriorityQueue<TradeOrder> buyOrders;
+   
+   public Stock(String s, String n, double p){
+      symbol = s;
+      name = n;
+      price = p;
+   }
+
+   public String getQuote(){
+      return "Hello";
+   }
+   
+   public void placeOrder(TradeOrder order){
+      if(order.isBuy()){
+         buyOrders.add(order);
+         order.getTrader().receiveMessage("New order:  Buy " + order.getSymbol() + "\n" + order.getShares() + " shares at " + order.getPrice());
+      }
+      else{
+         sellOrders.add(order);
+         order.getTrader().receiveMessage("New order:  Sell " + order.getSymbol() + "\n" + order.getShares() + " shares at market");
+      }
+      
+   }
+
+
+>>>>>>> 67e2ef713710bac87201b41c4980b7c80ed944b5
+}
+>>>>>>> ec7f9efed7f8f3b510aaabdebbd2456af41ea519

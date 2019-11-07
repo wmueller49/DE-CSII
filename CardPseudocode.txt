@@ -1,0 +1,89 @@
+public Card 
+
+	Fields:
+	-String suit
+	-String rank
+	
+	Constructors:
+		Card()
+			suit = defaultSuit;
+			rank = defaultRank;
+			
+		Card(int s, int r)
+			if s is a suit and r is a rank
+				suit = converted s into string;
+				rank = converted r into string;
+			
+			else
+				suit = defaultSuit;
+				rank = defaultRank;
+				
+		Card(String s, String r)
+			if s is a suit and r is a rank
+				suit = s;
+				rank = r;
+			else
+				suit = defaultSuit;
+				rank = defaultRank;
+			
+		Card(String s, int r)
+			if s is a suit and r is a rank
+				suit = s;
+				rank = converted r into string;
+			
+			else
+				suit = defaultSuit;
+				rank = defaultRank;
+			
+		Card(int s, String r)
+			if s is a suit and r is a rank
+				suit = converted s into string;
+				rank = r;
+			
+			else
+				suit = defaultSuit;
+				rank = defaultRank;
+	
+	Methods:
+		setSuitInt(int s)
+			switch(s)
+				cases for all int s, sets suit to the correct string
+		
+		setRankInt(int r)
+			switch (r)
+				cases for all int r, sets rank to correct string
+		
+		getSuitStr
+			returns suit
+			
+		getRankStr
+			returns rank
+			
+		getSuitInt
+			converts suit into an int
+			returns that int
+		
+		getRankInt
+			converts rank into an int
+			returns that int
+		
+		isRankStr
+			returns whether a string is a rank
+		
+		isSuitStr
+			returns whether a string is a suit
+			
+		isRankInt
+			returns whether an int is a rank
+		
+		isSuitInt
+			returns whether an int is a suit
+		
+		toString
+			returns rank + "of" + suit
+			
+		
+			
+		
+		
+		
