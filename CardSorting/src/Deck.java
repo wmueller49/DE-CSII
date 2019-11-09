@@ -73,9 +73,18 @@ public class Deck {
 		
 	}
 	
+	public Deck(Deck d) {
+		deck = d.getDeck();
+		topCard = deck.length-1;
+	}
+	
 	/*
 	 * Methods
 	 */
+	
+	public int getTopCard() {
+		return topCard;
+	}
 	
 	public Card[] getDeck() {
 		return deck;
