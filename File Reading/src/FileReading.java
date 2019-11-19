@@ -6,8 +6,11 @@
  * FileReading
  */
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class FileReading {
 	private static String outputPath = "output.txt";
@@ -26,30 +29,49 @@ public class FileReading {
 		catch(FileNotFoundException ex) {
 			
 		}
-		
-		
-		System.out.print("Please enter a file name: ");
-		String path1 = kb.next();
+		String path1 = "";
+		String path2 = "";
+		String path3 = "";
+		String answer = "";
+		String replaceFile = "";
+		if(args.length > 0) {
+			path1 = args[0];
+			if(args.length >= 1) {
+				path2 = args[1];
+			}
+			if(args.length >= 2) {
+				path3 = args[2];
+			}
+			if(args.length >= 3) {
+				answer = args[3];
+			}
+			if(args.length >= 4) {
+				replaceFile = args[4];
+			}
+		}
+		else {
+			System.out.print("Please enter a file name: ");
+			path1 = kb.next();
+			
+			System.out.print("Please enter a second file name: ");
+			path2 = kb.next();
+			
+			System.out.print("Please enter a story file name: ");
+			path3 = kb.next();
+			
+			System.out.print("Do you have a file for replacement words? (y/n) ");
+			answer = kb.next();
+			
+		}
 		
 		bracesBalanced(path1);
 		
-		System.out.print("Please enter a second file name: ");
-		String path2 = kb.next();
-		
 		identicalFiles(path1, path2);
-		
-		
-		System.out.print("Please enter a story file name: ");
-		String path3 = kb.next();
-		
-		
-		System.out.print("Do you have a file for replacement words? (y/n) ");
-		String answer = kb.next();
 		
 		if(answer.equals("y") || answer.equals("Y")) {
 			hasReplaceList = true;
 			System.out.print("Please enter the file: ");
-			String replaceFile = kb.next();
+			replaceFile = kb.next();
 			File replacementFile = new File(replaceFile);
 			Scanner inputReplaceFile = null;
 			
@@ -62,8 +84,8 @@ public class FileReading {
 				System.exit(1);
 			}
 			
-			while(inputReplaceFile.hasNext()) {
-				wordReplaceList.add(inputReplaceFile.next());
+			while(inputReplaceFile.hasNextLine()) {
+				wordReplaceList.add(inputReplaceFile.nextLine());
 			}
 			
 		}
@@ -104,6 +126,12 @@ public class FileReading {
 			}
 			else if(nextString.equals("}")) {
 				closeBrace++;
+				if(closeBrace == 1 && openBrace == 0) {
+					output.println("Braces Not Balanced");
+					output.println();
+					return;
+				}
+				
 			}
 		}
 		
@@ -142,9 +170,16 @@ public class FileReading {
 			output.close();
 			System.exit(1);
 		}
-		
-		file1String = inputFile1.nextLine();
-		file2String = inputFile2.nextLine();
+		if(inputFile1.hasNext() && inputFile2.hasNext()) {
+			file1String = inputFile1.nextLine();
+			file2String = inputFile2.nextLine();
+		}
+	
+		else {
+			output.println("Files Not Identical");
+			output.println();
+			return;
+		}
 		while(file1String.equals(file2String) && inputFile1.hasNext() && inputFile2.hasNext()) {
 			file1String = inputFile1.nextLine();
 			file2String = inputFile2.nextLine();
@@ -176,11 +211,13 @@ public class FileReading {
 		Scanner input = null;
 		Scanner inputDuplicate = null;
 		Scanner inputForSentences = null;
+		Scanner inputForStory = null;
 		
 		try {
 			input = new Scanner(file3);
 			inputDuplicate = new Scanner(file3);
 			inputForSentences = new Scanner(file3);
+			inputForStory = new Scanner(file3);
 		}
 		catch(FileNotFoundException ex) {
 			output.println("Part 3: Unable to Open File");
@@ -188,69 +225,46 @@ public class FileReading {
 			System.exit(1);
 		}
 		
-		while(input.hasNext()) {
-			String nextWord = input.next();
-			
-			if(!(hasReplaceList) && nextWord.contains("<") && nextWord.contains(">")) {
-				nextWord = nextWord.replace("<", "");
-				nextWord = nextWord.replace(">", "");
-				System.out.print("Please enter a(n) " + nextWord + ": ");
-				String replaceWord = kb.next();
-				wordReplaceList.add(replaceWord);
+		StringBuffer str = new StringBuffer();
+		while(inputForStory.hasNextLine()) {
+			str.append(inputForStory.nextLine() + "\n");
+		}
+		
+		String pattern = "<(.+?)>";
+		int n = 0;
+		int startIndex = 0;
+		int stopIndex = 0;
+		while(str.indexOf("<") != -1 && str.indexOf(">") != -1) {
+			startIndex = str.indexOf("<");
+			stopIndex = str.indexOf(">");
+			if(wordReplaceList.size() > n) {
+				if(str.indexOf("<", str.indexOf("<")) > str.indexOf(">"))
+					stopIndex = str.indexOf(">", str.indexOf(">")+1);
+				String toBeReplaced;
+				toBeReplaced = str.substring(startIndex, stopIndex);
+				if(toBeReplaced.contains("\n"))
+					str.replace(startIndex, stopIndex+1, "\n" + wordReplaceList.get(n));
+				else
+					str.replace(startIndex, stopIndex+1, wordReplaceList.get(n));
+				n++;
+			}
+			else if(n >= wordReplaceList.size()) {
+				String toBeReplaced;
+				if(str.indexOf("<", str.indexOf("<")) > str.indexOf(">"))
+					stopIndex = str.indexOf(">", str.indexOf(">") + 1);
+				toBeReplaced = str.substring(startIndex +1, stopIndex);
+				System.out.println("Please enter a(n) " + toBeReplaced + ": ");
+				String word = kb.next();
+				if(toBeReplaced.contains("\n"))
+					str.replace(startIndex, stopIndex+1, "\n" + word);
+				else
+					str.replace(startIndex, stopIndex+1, word);
+				n++;
 			}
 		}
-		input.close();
 		
-		int arrayListNum = 0;
-		boolean hasLine = true;
-		String lastWord = "";
-		
-		while(inputDuplicate.hasNext()) {
-			String nextWord = inputDuplicate.next();
-			
-			if(hasLine) {
-				String lineString = inputForSentences.nextLine();
-				String[] parts = lineString.split(" ");
-				lastWord = parts[parts.length - 1];
-				hasLine = false;
-			}
-			
-			if(nextWord.contains("<") && nextWord.contains(">")) {
-				if(arrayListNum < wordReplaceList.size()) {
-					output.print(wordReplaceList.get(arrayListNum) + " ");
-				}
-				if(arrayListNum >= wordReplaceList.size()) {
-					String copy = nextWord;
-					copy = copy.replace("<", "");
-					copy = copy.replace(">", "");
-					System.out.print("Please enter a(n) " + copy + ": ");
-					String replaceWord = kb.next();
-					output.print(replaceWord);
-				}
-				if(nextWord.equals(lastWord)) {
-					output.println();
-					if(inputForSentences.hasNextLine()) {
-						String lineString = inputForSentences.nextLine();
-						String[] parts = lineString.split(" ");
-						lastWord = parts[parts.length - 1];
-						hasLine = false;
-					}
-				}
-				arrayListNum++;
-			}
-			else{
-				output.print(nextWord + " ");
-				if(nextWord.equals(lastWord)) {
-					output.println();
-					if(inputForSentences.hasNextLine()) {
-						String lineString = inputForSentences.nextLine();
-						String[] parts = lineString.split(" ");
-						lastWord = parts[parts.length - 1];
-						hasLine = false;
-					}
-				}
-			}
-		}
+		output.println(str);
+
 		inputDuplicate.close();
 		inputForSentences.close();
 		output.close();
