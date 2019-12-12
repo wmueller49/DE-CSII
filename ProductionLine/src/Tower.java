@@ -8,6 +8,7 @@ import java.util.Stack;
 
 public class Tower {
 	
+	//Field
 	private Stack<Disk> towerStack;
 
 	/**
@@ -17,10 +18,17 @@ public class Tower {
 		towerStack = new Stack<Disk>();
 	}
 	
+	/**
+	 * @return the field towerStack
+	 */
 	public Stack getTower() {
 		return towerStack;
 	}
 	
+	
+	/**
+	 * @return the Tower as a String
+	 */
 	public String toString() {
 		String result = "";
 		for(Disk d: towerStack) {

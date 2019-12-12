@@ -10,12 +10,13 @@ import java.util.Queue;
 
 public class ProductionLine {
 	
+	//Fields
 	Queue<Disk> inputQueue;
 	Queue<Tower> outputQueue;
 	Tower arm;
 
 	/**
-	 * 
+	 * Constructor creates empty queues and an empy tower
 	 */
 	public ProductionLine() {
 		inputQueue = new LinkedList<Disk>();
@@ -23,10 +24,17 @@ public class ProductionLine {
 		arm = new Tower();
 	}
 	
+	/**
+	 * Adds a disk with radius d
+	 */
 	public void addDisk(Disk d){
 		inputQueue.add(d);
 	}
 	
+	/**
+	 * adds the tower to the output queue
+	 * Creates a new tower
+	 */
 	public void unloadRobot() {
 		outputQueue.add(arm);
 		arm = new Tower();
@@ -48,6 +56,10 @@ public class ProductionLine {
 		this.unloadRobot();
 	}
 	
+	/**
+	 * Removes the tower from the output queue
+	 * @return the tower
+	 */
 	public Tower removeTower() {
 		return outputQueue.poll();
 	}
