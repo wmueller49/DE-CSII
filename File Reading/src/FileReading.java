@@ -34,22 +34,25 @@ public class FileReading {
 		String path3 = "";
 		String answer = "";
 		String replaceFile = "";
+		
 		if(args.length > 0) {
 			path1 = args[0];
-			if(args.length >= 1) {
+			
+			if(args.length > 1) {
 				path2 = args[1];
 			}
-			if(args.length >= 2) {
+			if(args.length > 2) {
 				path3 = args[2];
 			}
-			if(args.length >= 3) {
+			if(args.length > 3) {
 				answer = args[3];
 			}
-			if(args.length >= 4) {
+			
+			if(args.length > 4) {
 				replaceFile = args[4];
 			}
 		}
-		else {
+		else if(args.length <= 0){
 			System.out.print("Please enter a file name: ");
 			path1 = kb.next();
 			
@@ -62,6 +65,11 @@ public class FileReading {
 			System.out.print("Do you have a file for replacement words? (y/n) ");
 			answer = kb.next();
 			
+			if(answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")) {
+				System.out.print("Please enter the file: ");
+				replaceFile = kb.next();
+			}
+			
 		}
 		
 		bracesBalanced(path1);
@@ -69,9 +77,6 @@ public class FileReading {
 		identicalFiles(path1, path2);
 		
 		if(answer.equals("y") || answer.equals("Y")) {
-			hasReplaceList = true;
-			System.out.print("Please enter the file: ");
-			replaceFile = kb.next();
 			File replacementFile = new File(replaceFile);
 			Scanner inputReplaceFile = null;
 			
@@ -87,11 +92,9 @@ public class FileReading {
 			while(inputReplaceFile.hasNextLine()) {
 				wordReplaceList.add(inputReplaceFile.nextLine());
 			}
-			
 		}
 		
 		shortStory(path3);
-		
 		
 	}
 	
