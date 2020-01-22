@@ -1,14 +1,15 @@
 /**
- * @author William Mueller
+ * William Mueller
  * DE CSII
- * Knapsack Problem A
+ * Knapsack
+ * 1/23/20
  */
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class KnapsackA {
 	
-	private static int globalCount = 0;
-	private static int globalMax = 0;
-
 	/**
 	 * 
 	 */
@@ -22,44 +23,64 @@ public class KnapsackA {
 	 * it has the largest possible value without exceeding limit.
 	*/
 	public static int knapsackSum(int[] w, int n, int limit) {
+		if(n <= 0) {
+			return w[n];
+		}
 		
-		if(n == 1) {
-			for(int i = globalCount; i < w.length; i++) {
-				if(w[i] < limit && w[i] > 1) {
-					return w[i];
-				}
-			}
+		if(limit <= 0) { 
+			return w[n];
+		}
+		
+		int num1 = knapsackSum(w, n-1, limit);
+		int num2 = knapsackSum(w, n-1, limit-w[n]);
+		int num3 = w[n] + num2;
+		
+		if(num3 <= limit && num3 > num1) {
+			return num3;
+		}
+		else if(num1 <= limit){
+			return num1;
+		}
+		else {
 			return 0;
 		}
-		
-		for(int j = globalCount; j < w.length; j++) {
-			int current = w[j];
-			
-			if(current < 0) {
-				current = 0;
-			}
-			
-			int sum = knapsackSum(w, n-1, limit-current);
-			int localMax = sum + current;
-			
-			if(localMax > globalMax && localMax <= limit) {
-				globalMax = localMax;
-			}
-			
-			if(localMax == limit) {
-				return localMax;
-			}
+	}
+	
+	public static int knapsackSumB(int[] w, int n, int limit, List<Integer> l) {
+		if(n <= 0) {
+			return w[n];
 		}
-		globalCount++;
-		return globalMax;
+		
+		if(limit <= 0) { 
+			return w[n];
+		}
+		
+		int num1 = knapsackSumB(w, n-1, limit, l);
+		int num2 = knapsackSumB(w, n-1, limit-w[n], l);
+		int num3 = w[n] + num2;
+		
+		if(num3 <= limit && num3 >= num1) {
+			l.add(w[n]);
+			return num3;
+		}
+		else if(num1 <= limit){
+			l.add(num1);
+			return num1;
+		}
+		else {
+			return 0;
+		}
 	}
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int[] arr = new int[] {7, 16, 20, 8, 1, 9};
-		System.out.println(knapsackSum(arr, 6, 30));
+		int[] arr = new int[] {20, 9, 6, 10, 8, 2};
+		//System.out.println(knapsackSum(arr, 3, 30));
+		List<Integer> list = new ArrayList<Integer>();		
+		System.out.println(knapsackSumB(arr, 5, 47, list));
+		System.out.println(list);
 	}
 
 }
