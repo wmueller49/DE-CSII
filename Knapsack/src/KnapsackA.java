@@ -1,5 +1,5 @@
 /**
- * William Mueller
+ * @author William Mueller
  * DE CSII
  * Knapsack
  * 1/23/20
@@ -14,6 +14,13 @@ import java.util.Scanner;
 
 public class KnapsackA {
 	
+	/**
+	 * Fields
+	 */
+	
+	/**
+	 * The output file will have the file name given by this String
+	 */
 	private static String outputPath = "knapsack.txt";
 	private static File outputFile = new File(outputPath);
 	private static PrintWriter output = null;
@@ -22,6 +29,10 @@ public class KnapsackA {
 	 * w contains n positive integers (n <= w.length).
 	 * Returns the sum of some of these integers such that
 	 * it has the largest possible value without exceeding limit.
+	 * @param w an array of weights
+	 * @param n the number of things in the array (equivalent to w.length() - 1)
+	 * @param limit the number which is considered the maximum
+	 * @return an integer which is the greatest possible sum of weights which does not exceed limit
 	*/
 	public static int knapsackSum(int[] w, int n, int limit) {
 		if(n <= 0) {
@@ -47,6 +58,16 @@ public class KnapsackA {
 		}
 	}
 	
+	/**
+	 * w contains n positive integers (n <= w.length).
+	 * Returns the sum of some of these integers such that
+	 * it has the largest possible value without exceeding limit.
+	 * @param w an array of weights
+	 * @param n the number of things in the array (equivalent to w.length() - 1)
+	 * @param limit the number which is considered the maximum
+	 * @param lst an empty list that will be filled with the weights used
+	 * @return an integer which is the greatest possible sum of weights which does not exceed limit
+	*/
 	public static int knapsackSumB(int[] w, int n, int limit, List<Integer> lst) {
 		if(n <= 0) {
 			lst.add(w[n]);
@@ -80,7 +101,7 @@ public class KnapsackA {
 	}
 	
 	/**
-	 * @param args
+	 * @param args can hold an input file name
 	 */
 	public static void main(String[] args) {
 		Scanner kb = new Scanner(System.in);
@@ -203,14 +224,6 @@ public class KnapsackA {
 			catchException = true;
 		}
 		output.close();
-		
-		/**
-		int[] arr = new int[] {18, 7, 12, 9, 13, 6};
-		//System.out.println(knapsackSum(arr, 4, 22));
-		List<Integer> list = new ArrayList<Integer>();		
-		System.out.println(knapsackSumB(arr, 5, 5, list));
-		System.out.println(list);
-		**/
 	}
 
 }
