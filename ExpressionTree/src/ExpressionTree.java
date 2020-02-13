@@ -8,16 +8,27 @@ import java.util.Stack;
 public class ExpressionTree extends TreeNode implements Expressions {
 	
 	/**
-	 * this doesn't even work
+	 * @param initValue
+	 * uses TreeNode's Constructor to create an ExpressionTree with the initial value initValue
 	 */
 	public ExpressionTree(Object initValue) {
 		super(initValue);
 	}
 	
+	/**
+	 * @param initValue the value of the node
+	 * @param initLeft the left tree
+	 * @param initRight the right tree
+	 * uses TreeNode's Constructor to create an Expression tree with the initial value initValue and left and right branches
+	 */
 	public ExpressionTree(Object initValue, TreeNode initLeft, TreeNode initRight) {
 		super(initValue, initLeft, initRight);
 	}
 	
+	/**
+	 * @param exp an array of Strings which holds the values of the tree
+	 * @return an ExpressionTree built from the values in exp
+	 */
 	public static ExpressionTree buildTree(String[] exp) {
 		Stack<Object> objStack = new Stack<Object>();
 		int i = 0;
@@ -26,13 +37,13 @@ public class ExpressionTree extends TreeNode implements Expressions {
 			ExpressionTree right = new ExpressionTree(null);
 			ExpressionTree left = new ExpressionTree(null);
 			
-			if(exp[i].equals("+")) {
+			if(exp[i].equals("+") || exp[i].equals("-") || exp[i].equals("*") || exp[i].equals("/")) {
 				if(!(objStack.empty())){
 						if(objStack.peek() instanceof ExpressionTree) {
 							left = (ExpressionTree) objStack.pop();
 						}
 						else {
-							if(objStack.peek().equals("+") || objStack.peek().equals("*")) {
+							if(objStack.peek().equals("+") || objStack.peek().equals("*") || objStack.peek().equals("-") || objStack.peek().equals("/")) {
 								left = new ExpressionTree(objStack.pop());
 							}
 							else {
@@ -46,7 +57,7 @@ public class ExpressionTree extends TreeNode implements Expressions {
 						objStack.push(new ExpressionTree(exp[i], left, right));
 					}
 					else {
-							if(objStack.peek().equals("+") || objStack.peek().equals("*")) {
+							if(objStack.peek().equals("+") || objStack.peek().equals("*") || objStack.peek().equals("-") || objStack.peek().equals("/")) {
 								right = new ExpressionTree(objStack.pop());
 							}
 							else {
@@ -61,43 +72,6 @@ public class ExpressionTree extends TreeNode implements Expressions {
 					objStack.push(tree);
 				}
 			}
-			
-			else if(exp[i].equals("*")) {
-				if(!(objStack.empty())){
-						if(objStack.peek() instanceof ExpressionTree) {
-							left = (ExpressionTree) objStack.pop();
-						}
-						else {
-							if(objStack.peek().equals("+") || objStack.peek().equals("*")) {
-								left = new ExpressionTree(objStack.pop());
-							}
-							else {
-								left = new ExpressionTree(Integer.parseInt((String)objStack.pop()));	
-							}
-						}
-				}
-				if(!(objStack.empty())){
-					if(objStack.peek() instanceof ExpressionTree) {
-						right = (ExpressionTree) objStack.pop();
-						objStack.push(new ExpressionTree(exp[i], left, right));
-					}
-					else {
-						if(objStack.peek().equals("+") || objStack.peek().equals("*")) {
-							right = new ExpressionTree(objStack.pop());
-						}
-						else {
-							right = new ExpressionTree(Integer.parseInt((String)objStack.pop()));	
-						}
-						objStack.push(new ExpressionTree(exp[i], left, right));
-					}
-				}
-				else {
-					ExpressionTree tree = new ExpressionTree(exp[i]);
-					tree.setLeft(left);
-					objStack.push(tree);
-				}
-			}
-			
 			else {
 				objStack.push(exp[i]);
 			}
@@ -108,6 +82,10 @@ public class ExpressionTree extends TreeNode implements Expressions {
 		
 	}
 	
+	/**
+	 * evaluates the ExpressionTree's value
+	 * @return an int of that value
+	 */
 	public int evalTree() {
 		if(this == null) {
 			return 0;
@@ -120,6 +98,14 @@ public class ExpressionTree extends TreeNode implements Expressions {
 			return ((ExpressionTree) this.getLeft()).evalTree() * ((ExpressionTree) this.getRight()).evalTree();
 		}
 		
+		if(this.getValue().equals("/")) {
+			return ((ExpressionTree) this.getLeft()).evalTree() / ((ExpressionTree) this.getRight()).evalTree();
+		}
+		
+		if(this.getValue().equals("-")) {
+			return ((ExpressionTree) this.getLeft()).evalTree() - ((ExpressionTree) this.getRight()).evalTree();
+		}
+		
 		if(this.getValue().equals("+")) {
 			return ((ExpressionTree) this.getLeft()).evalTree() + ((ExpressionTree) this.getRight()).evalTree();
 		}
@@ -128,6 +114,9 @@ public class ExpressionTree extends TreeNode implements Expressions {
 		}
 	}
 	
+	/**
+	 * @return a String of the tree in prefix notation
+	 */
 	public String toPrefixNotation() {
 		String s = "";
 		
@@ -145,6 +134,9 @@ public class ExpressionTree extends TreeNode implements Expressions {
 		return s;
 	}
 	
+	/**
+	 * @return a String of the tree in infix notation
+	 */
 	public String toInfixNotation() {
 		String s = "";
 		
@@ -162,6 +154,9 @@ public class ExpressionTree extends TreeNode implements Expressions {
 		return s;
 	}
 	
+	/**
+	 * @return a String of the tree in postfix notation
+	 */
 	public String toPostfixNotation() {	
 		String s = "";
 		
@@ -179,6 +174,10 @@ public class ExpressionTree extends TreeNode implements Expressions {
 		return s;
 	}
 	
+	/**
+	 * @param exp which holds values to be calculated
+	 * @return an int of the value of the array
+	 */
 	public int postfixEval(String[] exp) {
 		Stack<Integer> numStack = new Stack();
 		
@@ -193,26 +192,22 @@ public class ExpressionTree extends TreeNode implements Expressions {
 				int num2 = numStack.pop();
 				numStack.push(num1 + num2);
 			}
+			else if(exp[i].equals("/")){
+				int num1 = numStack.pop();
+				int num2 = numStack.pop();
+				numStack.push(num1 / num2);
+			}
+			else if(exp[i].equals("-")) {
+				int num1 = numStack.pop();
+				int num2 = numStack.pop();
+				numStack.push(num1 + num2);
+			}
 			else {
 				numStack.push(Integer.valueOf(exp[i]));
 			}
 		}
 		
 		return numStack.pop();
-	}
-	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		String[] s = new String[] {"3", "4", "+", "8", "9", "+", "*"};
-		ExpressionTree e = buildTree(s);
-		System.out.println(e.postfixEval(s));
-		System.out.println(e.toPostfixNotation());
-		System.out.println(e.toInfixNotation());
-		System.out.println(e.toPrefixNotation());
-		System.out.println(e.evalTree());
 	}
 
 }
