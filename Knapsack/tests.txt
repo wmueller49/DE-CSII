@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 Test01.txt
 Test02.txt
 notatest.txt
 Test03.txt
 Test04.txt
 notevenaFile
+=======
+Test01.txt
+Test02.txt
+notatest.txt
+Test03.txt
+Test04.txt
+notevenaFile
+>>>>>>> 53e487bbdcc7b5b2fd6dced0773a699313261cb7
 Test05.txt

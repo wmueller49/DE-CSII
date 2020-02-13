@@ -1,4 +1,5 @@
 Test01.txt	30	5, 20, 4
+<<<<<<< HEAD
 
 5 pound watermelon
 20 pound watermelon
@@ -25,3 +26,31 @@ Test04.txt	73	29, 13, 100, 3
 3 pound watermelon
 
 
+=======
+
+5 pound watermelon
+20 pound watermelon
+4 pound watermelon
+
+
+Test02.txt	132	2, 17, 5, 3
+
+2 pound watermelon
+17 pound watermelon
+5 pound watermelon
+3 pound watermelon
+
+
+Test03.txt	25	30, 50, 80
+
+No possible watermelons
+
+
+Test04.txt	73	29, 13, 100, 3
+
+29 pound watermelon
+13 pound watermelon
+3 pound watermelon
+
+
+>>>>>>> 53e487bbdcc7b5b2fd6dced0773a699313261cb7
