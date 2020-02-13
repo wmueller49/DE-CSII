@@ -1,0 +1,231 @@
+evalTree: 12
+Prefix: +, 8, 4
+Infix: 8, +, 4
+Postfix: 8, 4, +
+postFixEval: 12
+
+
+evalTree: 48
+Prefix: *, 8, 6
+Infix: 8, *, 6
+Postfix: 8, 6, *
+postFixEval: 48
+
+
+evalTree: 32
+Prefix: +, 8, *, 4, 6
+Infix: 8, +, 4, *, 6
+Postfix: 8, 4, 6, *, +
+postFixEval: 32
+
+
+evalTree: 38
+Prefix: +, *, 8, 4, 6
+Infix: 8, *, 4, +, 6
+Postfix: 8, 4, *, 6, +
+postFixEval: 38
+
+
+evalTree: 368
+Prefix: *, 8, +, 4, *, 6, 7
+Infix: 8, *, 4, +, 6, *, 7
+Postfix: 8, 4, 6, 7, *, +, *
+postFixEval: 368
+
+
+evalTree: 248
+Prefix: *, 8, +, *, 4, 6, 7
+Infix: 8, *, 4, *, 6, +, 7
+Postfix: 8, 4, 6, *, 7, +, *
+postFixEval: 248
+
+
+evalTree: 224
+Prefix: *, +, 8, *, 4, 6, 7
+Infix: 8, +, 4, *, 6, *, 7
+Postfix: 8, 4, 6, *, +, 7, *
+postFixEval: 224
+
+
+evalTree: 416
+Prefix: *, *, 8, 4, +, 6, 7
+Infix: 8, *, 4, *, 6, +, 7
+Postfix: 8, 4, *, 6, 7, +, *
+postFixEval: 416
+
+
+evalTree: 266
+Prefix: *, +, *, 8, 4, 6, 7
+Infix: 8, *, 4, +, 6, *, 7
+Postfix: 8, 4, *, 6, +, 7, *
+postFixEval: 266
+
+
+evalTree: 116
+Prefix: +, 8, *, 4, +, 6, *, 7, 3
+Infix: 8, +, 4, *, 6, +, 7, *, 3
+Postfix: 8, 4, 6, 7, 3, *, +, *, +
+postFixEval: 116
+
+
+evalTree: 188
+Prefix: +, 8, *, 4, +, *, 6, 7, 3
+Infix: 8, +, 4, *, 6, *, 7, +, 3
+Postfix: 8, 4, 6, 7, *, 3, +, *, +
+postFixEval: 188
+
+
+evalTree: 146
+Prefix: +, 8, *, +, 4, *, 6, 7, 3
+Infix: 8, +, 4, +, 6, *, 7, *, 3
+Postfix: 8, 4, 6, 7, *, +, 3, *, +
+postFixEval: 146
+
+
+evalTree: 371
+Prefix: +, *, 8, +, 4, *, 6, 7, 3
+Infix: 8, *, 4, +, 6, *, 7, +, 3
+Postfix: 8, 4, 6, 7, *, +, *, 3, +
+postFixEval: 371
+
+
+evalTree: 248
+Prefix: +, 8, *, *, 4, 6, +, 7, 3
+Infix: 8, +, 4, *, 6, *, 7, +, 3
+Postfix: 8, 4, 6, *, 7, 3, +, *, +
+postFixEval: 248
+
+
+evalTree: 101
+Prefix: +, 8, *, +, *, 4, 6, 7, 3
+Infix: 8, +, 4, *, 6, +, 7, *, 3
+Postfix: 8, 4, 6, *, 7, +, 3, *, +
+postFixEval: 101
+
+
+evalTree: 251
+Prefix: +, *, 8, +, *, 4, 6, 7, 3
+Infix: 8, *, 4, *, 6, +, 7, +, 3
+Postfix: 8, 4, 6, *, 7, +, *, 3, +
+postFixEval: 251
+
+
+evalTree: 53
+Prefix: +, +, 8, *, 4, 6, *, 7, 3
+Infix: 8, +, 4, *, 6, +, 7, *, 3
+Postfix: 8, 4, 6, *, +, 7, 3, *, +
+postFixEval: 53
+
+
+evalTree: 227
+Prefix: +, *, +, 8, *, 4, 6, 7, 3
+Infix: 8, +, 4, *, 6, *, 7, +, 3
+Postfix: 8, 4, 6, *, +, 7, *, 3, +
+postFixEval: 227
+
+
+evalTree: 92
+Prefix: +, *, 8, 4, *, 6, +, 7, 3
+Infix: 8, *, 4, +, 6, *, 7, +, 3
+Postfix: 8, 4, *, 6, 7, 3, +, *, +
+postFixEval: 92
+
+
+evalTree: 71
+Prefix: +, *, 8, 4, *, +, 6, 7, 3
+Infix: 8, *, 4, +, 6, +, 7, *, 3
+Postfix: 8, 4, *, 6, 7, +, 3, *, +
+postFixEval: 71
+
+
+evalTree: 419
+Prefix: +, *, *, 8, 4, +, 6, 7, 3
+Infix: 8, *, 4, *, 6, +, 7, +, 3
+Postfix: 8, 4, *, 6, 7, +, *, 3, +
+postFixEval: 419
+
+
+evalTree: 59
+Prefix: +, +, *, 8, 4, 6, *, 7, 3
+Infix: 8, *, 4, +, 6, +, 7, *, 3
+Postfix: 8, 4, *, 6, +, 7, 3, *, +
+postFixEval: 59
+
+
+evalTree: 269
+Prefix: +, *, +, *, 8, 4, 6, 7, 3
+Infix: 8, *, 4, +, 6, *, 7, +, 3
+Postfix: 8, 4, *, 6, +, 7, *, 3, +
+postFixEval: 269
+
+
+evalTree: 92
+Prefix: +, *, 8, 4, *, 6, +, 7, 3
+Infix: 8, *, 4, +, 6, *, 7, +, 3
+Postfix: 8, 4, *, 6, 7, 3, +, *, +
+postFixEval: 92
+
+
+evalTree: 71
+Prefix: +, *, 8, 4, *, +, 6, 7, 3
+Infix: 8, *, 4, +, 6, +, 7, *, 3
+Postfix: 8, 4, *, 6, 7, +, 3, *, +
+postFixEval: 71
+
+
+evalTree: 419
+Prefix: +, *, *, 8, 4, +, 6, 7, 3
+Infix: 8, *, 4, *, 6, +, 7, +, 3
+Postfix: 8, 4, *, 6, 7, +, *, 3, +
+postFixEval: 419
+
+
+evalTree: 90
+Prefix: +, 8, +, 4, *, 6, +, 7, *, 3, 2
+Infix: 8, +, 4, +, 6, *, 7, +, 3, *, 2
+Postfix: 8, 4, 6, 7, 3, 2, *, +, *, +, +
+postFixEval: 90
+
+
+evalTree: 190
+Prefix: +, +, 8, *, 4, +, *, 6, 7, 3, 2
+Infix: 8, +, 4, *, 6, *, 7, +, 3, +, 2
+Postfix: 8, 4, 6, 7, *, 3, +, *, +, 2, +
+postFixEval: 190
+
+
+evalTree: 60
+Prefix: +, 8, +, +, 4, *, 6, 7, *, 3, 2
+Infix: 8, +, 4, +, 6, *, 7, +, 3, *, 2
+Postfix: 8, 4, 6, 7, *, +, 3, 2, *, +, +
+postFixEval: 60
+
+
+evalTree: 373
+Prefix: +, *, 8, +, 4, *, 6, 7, +, 3, 2
+Infix: 8, *, 4, +, 6, *, 7, +, 3, +, 2
+Postfix: 8, 4, 6, 7, *, +, *, 3, 2, +, +
+postFixEval: 373
+
+
+evalTree: 373
+Prefix: +, +, *, 8, +, 4, *, 6, 7, 3, 2
+Infix: 8, *, 4, +, 6, *, 7, +, 3, +, 2
+Postfix: 8, 4, 6, 7, *, +, *, 3, +, 2, +
+postFixEval: 373
+
+
+evalTree: 148
+Prefix: +, 8, +, *, +, 4, *, 6, 7, 3, 2
+Infix: 8, +, 4, +, 6, *, 7, *, 3, +, 2
+Postfix: 8, 4, 6, 7, *, +, 3, *, 2, +, +
+postFixEval: 148
+
+
+evalTree: 148
+Prefix: +, +, 8, *, +, 4, *, 6, 7, 3, 2
+Infix: 8, +, 4, +, 6, *, 7, *, 3, +, 2
+Postfix: 8, 4, 6, 7, *, +, 3, *, +, 2, +
+postFixEval: 148
+
+

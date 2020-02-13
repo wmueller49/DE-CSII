@@ -1,0 +1,112 @@
+evalTree: 5
+Prefix: +, 2, 3
+Infix: 2, +, 3
+Postfix: 2, 3, +
+postFixEval: 5
+
+
+evalTree: 5
+Prefix: +, 3, 2
+Infix: 3, +, 2
+Postfix: 3, 2, +
+postFixEval: 5
+
+
+evalTree: 6
+Prefix: *, 2, 3
+Infix: 2, *, 3
+Postfix: 2, 3, *
+postFixEval: 6
+
+
+evalTree: 6
+Prefix: *, 3, 2
+Infix: 3, *, 2
+Postfix: 3, 2, *
+postFixEval: 6
+
+
+evalTree: 50
+Prefix: *, +, 8, 2, 5
+Infix: 8, +, 2, *, 5
+Postfix: 8, 2, +, 5, *
+postFixEval: 50
+
+
+evalTree: 50
+Prefix: *, 5, +, 8, 2
+Infix: 5, *, 8, +, 2
+Postfix: 5, 8, 2, +, *
+postFixEval: 50
+
+
+evalTree: 13
+Prefix: +, 3, *, 5, 2
+Infix: 3, +, 5, *, 2
+Postfix: 3, 5, 2, *, +
+postFixEval: 13
+
+
+evalTree: 13
+Prefix: +, *, 5, 2, 3
+Infix: 5, *, 2, +, 3
+Postfix: 5, 2, *, 3, +
+postFixEval: 13
+
+
+evalTree: 20
+Prefix: +, +, 3, *, 5, 2, 7
+Infix: 3, +, 5, *, 2, +, 7
+Postfix: 3, 5, 2, *, +, 7, +
+postFixEval: 20
+
+
+evalTree: 28
+Prefix: +, *, 3, +, 5, 2, 7
+Infix: 3, *, 5, +, 2, +, 7
+Postfix: 3, 5, 2, +, *, 7, +
+postFixEval: 28
+
+
+evalTree: 37
+Prefix: +, *, 3, *, 5, 2, 7
+Infix: 3, *, 5, *, 2, +, 7
+Postfix: 3, 5, 2, *, *, 7, +
+postFixEval: 37
+
+
+evalTree: 210
+Prefix: *, *, 3, *, 5, 2, 7
+Infix: 3, *, 5, *, 2, *, 7
+Postfix: 3, 5, 2, *, *, 7, *
+postFixEval: 210
+
+
+evalTree: 70
+Prefix: *, +, 3, +, 5, 2, 7
+Infix: 3, +, 5, +, 2, *, 7
+Postfix: 3, 5, 2, +, +, 7, *
+postFixEval: 70
+
+
+evalTree: 17
+Prefix: +, +, 3, +, 5, 2, 7
+Infix: 3, +, 5, +, 2, +, 7
+Postfix: 3, 5, 2, +, +, 7, +
+postFixEval: 17
+
+
+evalTree: 149
+Prefix: +, *, *, 3, +, 5, 2, 7, 2
+Infix: 3, *, 5, +, 2, *, 7, +, 2
+Postfix: 3, 5, 2, +, *, 7, *, 2, +
+postFixEval: 149
+
+
+evalTree: 48
+Prefix: +, 3, *, 5, +, 2, 7
+Infix: 3, +, 5, *, 2, +, 7
+Postfix: 3, 5, 2, 7, +, *, +
+postFixEval: 48
+
+
