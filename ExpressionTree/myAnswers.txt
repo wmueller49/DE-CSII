@@ -110,3 +110,31 @@ Postfix: 3, 5, 2, 7, +, *, +
 postFixEval: 48
 
 
+evalTree: 1
+Prefix: -, 2, 3
+Infix: 2, -, 3
+Postfix: 2, 3, -
+postFixEval: 5
+
+
+evalTree: 1
+Prefix: /, 2, 3
+Infix: 2, /, 3
+Postfix: 2, 3, /
+postFixEval: 1
+
+
+evalTree: 5
+Prefix: /, -, 2, 3, 5
+Infix: 2, -, 3, /, 5
+Postfix: 2, 3, -, 5, /
+postFixEval: 1
+
+
+evalTree: 1
+Prefix: /, +, 2, 3, 5
+Infix: 2, +, 3, /, 5
+Postfix: 2, 3, +, 5, /
+postFixEval: 1
+
+

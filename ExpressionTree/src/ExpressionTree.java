@@ -16,10 +16,10 @@ public class ExpressionTree extends TreeNode implements Expressions {
 	}
 	
 	/**
+	 *  uses TreeNode's Constructor to create an Expression tree with the initial value initValue and left and right branches
 	 * @param initValue the value of the node
 	 * @param initLeft the left tree
 	 * @param initRight the right tree
-	 * uses TreeNode's Constructor to create an Expression tree with the initial value initValue and left and right branches
 	 */
 	public ExpressionTree(Object initValue, TreeNode initLeft, TreeNode initRight) {
 		super(initValue, initLeft, initRight);
