@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-Test01.txt
-Test02.txt
-notatest.txt
-Test03.txt
-Test04.txt
-notevenaFile
-=======
-Test01.txt
-Test02.txt
-notatest.txt
-Test03.txt
-Test04.txt
-notevenaFile
->>>>>>> 53e487bbdcc7b5b2fd6dced0773a699313261cb7
-Test05.txt
+knapsackTest01.txt
+knapsackTest02.txt
+knapsackTest04.txt
+knapsackTest05.txt
+knapsackTest06.txt
+knapsackTest07.txt
+knapsackTest09.txt
+knapsackTest10.txt

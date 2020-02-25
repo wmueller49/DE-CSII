@@ -1,56 +1,54 @@
-Test01.txt	30	5, 20, 4
-<<<<<<< HEAD
+knapsackTest01.txt	250	8, 9, 190, 12, 13, 4
 
-5 pound watermelon
-20 pound watermelon
+8 pound watermelon
+9 pound watermelon
+190 pound watermelon
+12 pound watermelon
+13 pound watermelon
 4 pound watermelon
 
 
-Test02.txt	132	2, 17, 5, 3
+knapsackTest02.txt	6	8, 9, 190, 12, 13, 4
 
-2 pound watermelon
-17 pound watermelon
-5 pound watermelon
-3 pound watermelon
-
-
-Test03.txt	25	30, 50, 80
-
-No possible watermelons
-
-
-Test04.txt	73	29, 13, 100, 3
-
-29 pound watermelon
-13 pound watermelon
-3 pound watermelon
-
-
-=======
-
-5 pound watermelon
-20 pound watermelon
 4 pound watermelon
 
 
-Test02.txt	132	2, 17, 5, 3
+knapsackTest04.txt	31	5, 6, 2, 3, 9, 12, 48
 
-2 pound watermelon
-17 pound watermelon
 5 pound watermelon
+2 pound watermelon
 3 pound watermelon
+9 pound watermelon
+12 pound watermelon
 
 
-Test03.txt	25	30, 50, 80
+knapsackTest05.txt	25	5, 6, 2, 3, 9, 12, 48
 
-No possible watermelons
-
-
-Test04.txt	73	29, 13, 100, 3
-
-29 pound watermelon
-13 pound watermelon
+5 pound watermelon
+6 pound watermelon
+2 pound watermelon
 3 pound watermelon
+9 pound watermelon
 
 
->>>>>>> 53e487bbdcc7b5b2fd6dced0773a699313261cb7
+knapsackTest06.txt	50	5, 8, 6, 8, 2, 3, 9
+
+5 pound watermelon
+8 pound watermelon
+6 pound watermelon
+8 pound watermelon
+2 pound watermelon
+3 pound watermelon
+9 pound watermelon
+
+
+knapsackTest09.txt	5	9, 8, 7, 6, 1, 5
+
+5 pound watermelon
+
+
+knapsackTest10.txt	5	5, 1, 6, 7, 8, 9
+
+5 pound watermelon
+
+
