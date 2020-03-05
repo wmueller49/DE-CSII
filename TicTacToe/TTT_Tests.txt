@@ -1,0 +1,11 @@
+   xxxoo 
+   o oxxx
+   oo xxx
+   ooo xx
+   ooox x
+   oooxx 
+  x  xoox
+  x  xooo
+  x x xoo
+  x x ooo
+  x x oox

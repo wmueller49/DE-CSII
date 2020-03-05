@@ -1,0 +1,11 @@
+   xxxoo : true
+   o oxxx: true
+   oo xxx: true
+   ooo xx: true
+   ooox x: true
+   oooxx : true
+  x  xoox: true
+  x  xooo: true
+  x x xoo: true
+  x x ooo: true
+  x x oox: false
