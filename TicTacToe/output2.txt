@@ -1,0 +1,33 @@
+   xxxoo : true
+   o oxxx: true
+   oo xxx: true
+   ooo xx: true
+   ooox x: true
+   oooxx : true
+  x  xoox: true
+  x  xooo: true
+  x x xoo: true
+  x x ooo: true
+  x x oox: false
+
+Size of array: 8000
+Load factor: 1.66073546856465
+Number of collisions: 951
+Maximum chain length: 6
+Average chain length: 2
+
+Number of entries in Quarter 1: 203
+Number of entries in Quarter 2: 229
+Number of entries in Quarter 3: 191
+Number of entries in Quarter 4: 220
+
+Number of collisions in Tenth 1: 85
+Number of collisions in Tenth 2: 110
+Number of collisions in Tenth 3: 77
+Number of collisions in Tenth 4: 102
+Number of collisions in Tenth 5: 126
+Number of collisions in Tenth 6: 77
+Number of collisions in Tenth 7: 68
+Number of collisions in Tenth 8: 106
+Number of collisions in Tenth 9: 108
+Number of collisions in Tenth 10: 92

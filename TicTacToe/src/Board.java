@@ -192,6 +192,7 @@ abstract class Board extends JFrame implements ActionListener {
 	}
 
 	public void displayRandomString() {
+		boardString = "";
 		for (int r = 0; r < TicTacToe.ROWS; r++)
 			for (int c = 0; c < TicTacToe.COLS; c++) {
 				char ch = randomXO();
