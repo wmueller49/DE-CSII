@@ -1,3 +1,10 @@
+/**
+ * @author William Mueller
+ * DE CSII
+ * TicTacToeHashCode
+ * 3/16/2020
+ */
+
 import java.util.Arrays;
 
 public class TicTacToe {
@@ -6,6 +13,12 @@ public class TicTacToe {
    public final static int POSSIBILITIES = (int) Math.pow(3,9);
    public final static int CHAR_POSSIBILITIES = 3; // x, o or space
   
+   /**
+    * finds the number of characters in an array of characters
+    * @param b the array of characters
+    * @param ch a given character
+    * @return the number of ch found in b
+    */
    private static int numChars(char[][] b, char ch) {
       int total = 0;
       for (int r = 0; r < ROWS; r++)
@@ -15,6 +28,11 @@ public class TicTacToe {
       return total;
    }
   
+   /**
+    * finds whether a certain board is valid
+    * @param board the board to be tested
+    * @return true if the board is valid, false otherwise
+    */
    public static boolean valid(char[][] board) {
    
    // Ensure there are at least 3 xs and 2 os, or 3 os and 2 xs
@@ -28,6 +46,11 @@ public class TicTacToe {
       return false;
    }
   
+   /**
+    * converts a given board into a string
+    * @param b the given board
+    * @return the string version of that board
+    */
    public static String boardToString(char[][] b) {
       String result = "";
       for (int r = 0; r < ROWS; r++) {
@@ -38,6 +61,11 @@ public class TicTacToe {
       return result;
    }
    
+   /**
+    * converts a given string into a board
+    * @param board the given string
+    * @return the board version of that string
+    */
    public static char[][] stringToBoard(String board) {
       char[][] b = new char[ROWS][COLS];
       int index = 0;
@@ -48,7 +76,11 @@ public class TicTacToe {
       return b;
    }
 
-   
+   /**
+    * converts a character into a numeric value
+    * @param ch the character to be converted
+    * @return the assigned value for that character
+    */
    public static char whichLetter(char ch) {
       switch (ch) {
          case '1' : 
@@ -62,6 +94,11 @@ public class TicTacToe {
       }
    }
      
+   /**
+    * creates a board from a string
+    * @param s the given string
+    * @return a board from the given string
+    */
    public static char[][] makeBoard(String s) {
       char[][] b = new char[ROWS][COLS];
       int ch = 0;
@@ -73,6 +110,11 @@ public class TicTacToe {
       return b;
    }
    
+   /**
+    * adds one to the current string
+    * @param s the inputted string
+    * @return a string with one added to the inputted string
+    */
    private static String addOne(String s) {
    // s is a 9 character string, composed of 0s, 1s, and 2s.  Add 1 to the last char, adjusting
    // all the rest of the characters as necessary.
@@ -91,6 +133,10 @@ public class TicTacToe {
       return new String(ch);
    }
    
+   /**
+    * fills a board with values
+    * @return a string array of values
+    */
    public static String[] fillValues() {
       String strBoard = "000000000";
       String[] values = new String[POSSIBILITIES];
@@ -103,6 +149,11 @@ public class TicTacToe {
       return values;
    }
    
+   /**
+    * checks if a board is a diagonal winner
+    * @param board to be checked
+    * @return true if it is a diagonal winner, false otherwise
+    */
    private static boolean diagonalWin(char[][] board) {
       int wins = 0;
       if ((board[0][0] == 'x' && board[1][1] == 'x' && board[2][2] == 'x') || 
@@ -117,6 +168,11 @@ public class TicTacToe {
       return wins == 1;
    }
    
+   /**
+    * checks if the board is a row winner
+    * @param board to be checked
+    * @return true if it is a row winner, false otherwise
+    */
    private static boolean rowWin(char[][] board) {
       char ch;
       int wins = 0;
@@ -134,6 +190,12 @@ public class TicTacToe {
       } 
       return wins == 1;
    } 
+   
+   /**
+    * checks if the board is a column winner
+    * @param board to be checked
+    * @return true if it is a column winner, false otherwise
+    */
    private static boolean colWin(char[][] board) {
       char ch;
       int wins = 0;
@@ -152,11 +214,21 @@ public class TicTacToe {
         return wins == 1;
    } 
    
+   /**
+    * returns whether a board is a winner
+    * @param b the board to be checked
+    * @return true if it is a winner, false otherwise
+    */
    public static boolean isWin(char[][]b) {
      return valid(b) && (rowWin(b) ^ colWin(b) ^ diagonalWin(b));
      }
 
 
+   /**
+    * returns whether a given board is a winner
+    * @param b the board to be checked
+    * @return a string that says if the board is a winner or a loser
+    */
    public static String isWinString(char[][]b) {
      boolean v = valid(b);
      boolean r = rowWin(b);
@@ -172,11 +244,21 @@ public class TicTacToe {
        return "loser";
    }
      
+   /**
+    * returns whether a string is a winner
+    * @param s the string to be checked
+    * @return true if it is a winner, false otherwise
+    */
    public static boolean isWin(String s) {
       char[][] b = stringToBoard(s);
       return isWin(b);
    }
 
+   /**
+    * returns a string of whether a given string is a winner
+    * @param s the string to be checked
+    * @return a string that says if the inputted string is a winner or a loser
+    */
    public static String isWinString(String s) {
       char[][] b = stringToBoard(s);
       return isWinString(b);

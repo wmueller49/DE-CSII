@@ -1,0 +1,110 @@
+William Mueller
+DE CSII
+TicTacToe Analysis
+
+Hash function 1:
+	My first hash function gives the characters 'x', 'o', and ' ', the values of 1, 2, and 0, respectively. From this, each string is calculated to be a number from 0 to 19683 by multiplying 3 to the power of the index of that character times that character's value. This guarantees that every number from 0 to 19683 appears from the possible strings of TicTacToe and there are no collisions.
+
+Hash function 2:
+	My second hash function takes a string and multiplies it by the value of the character at a certain index, then multiplies it by that index. Lastly, it then multiplies by a prime number before performing modulus by the length of the array if the numer is too large to fit into the array.
+
+Part 1 Reporting:
+ Inputted Tests:
+     xxxoo 
+   o oxxx
+   oo xxx
+   ooo xx
+   ooox x
+   oooxx 
+  x  xoox
+  x  xooo
+  x x xoo
+  x x ooo
+  x x oox
+
+ Output:
+     xxxoo : true
+   o oxxx: true
+   oo xxx: true
+   ooo xx: true
+   ooox x: true
+   oooxx : true
+  x  xoox: true
+  x  xooo: true
+  x x xoo: true
+  x x ooo: true
+  x x oox: false
+
+
+Part 2 Reporting:
+ Size of array: 8000
+ Load factor: 1.66073546856465
+ Number of collisions: 951
+ Maximum chain length: 6
+ Average chain length: 2
+
+ Number of entries in Quarter 1: 203
+ Number of entries in Quarter 2: 229
+ Number of entries in Quarter 3: 191
+ Number of entries in Quarter 4: 220
+
+ Number of collisions in Tenth 1: 85
+ Number of collisions in Tenth 2: 110
+ Number of collisions in Tenth 3: 77
+ Number of collisions in Tenth 4: 102
+ Number of collisions in Tenth 5: 126
+ Number of collisions in Tenth 6: 77
+ Number of collisions in Tenth 7: 68
+ Number of collisions in Tenth 8: 106
+ Number of collisions in Tenth 9: 108
+ Number of collisions in Tenth 10: 92
+
+
+Part 3 Reporting:
+ Java's hashCode():
+  Capacity: 2048
+  Entries: 1400
+
+  Num entries in Quarter 1: 397
+  Num entries in Quarter 2: 362
+  Num entries in Quarter 3: 315
+  Num entries in Quarter 4: 326
+
+  Num collisions in Tenth 1: 44
+  Num collisions in Tenth 2: 65
+  Num collisions in Tenth 3: 37
+  Num collisions in Tenth 4: 31
+  Num collisions in Tenth 5: 49
+  Num collisions in Tenth 6: 42
+  Num collisions in Tenth 7: 22
+  Num collisions in Tenth 8: 33
+  Num collisions in Tenth 9: 36
+  Num collisions in Tenth 10: 33
+
+  Avg chain: 2
+  Max chain: 4
+ 
+ My hashCode():
+  Capacity: 2048
+  Entries: 1400
+
+  Num entries in Quarter 1: 365
+  Num entries in Quarter 2: 326
+  Num entries in Quarter 3: 370
+  Num entries in Quarter 4: 339
+
+  Num collisions in Tenth 1: 53
+  Num collisions in Tenth 2: 52
+  Num collisions in Tenth 3: 54
+  Num collisions in Tenth 4: 53
+  Num collisions in Tenth 5: 28
+  Num collisions in Tenth 6: 55
+  Num collisions in Tenth 7: 48
+  Num collisions in Tenth 8: 60
+  Num collisions in Tenth 9: 41
+  Num collisions in Tenth 10: 45
+
+  Avg chain: 2
+  Max chain: 6
+
+

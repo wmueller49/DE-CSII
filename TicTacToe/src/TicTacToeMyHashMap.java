@@ -10,17 +10,18 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Scanner;
 
-public class TicTacToeHashMap  {
+public class TicTacToeMyHashMap  {
 
-	//private field to hold a hashmap of winners
 	private HashMap winners = new HashMap();
+	private String currentString = null;
 
 	/**
 	 * Constructor that instantiates winners with an initial capacity of 50 and load factor of .75
 	 */
-   TicTacToeHashMap() {
+   TicTacToeMyHashMap() {
 	   int initCapacity = 50;
 	   float loadFactor = 0.75f;
 	   winners = new HashMap(initCapacity, loadFactor);
@@ -72,7 +73,7 @@ public class TicTacToeHashMap  {
 	   
 	   return numEntries;
    }
-   
+
    /**
     * finds the number of entries in a portion of winners
     * @param start the starting index
@@ -81,46 +82,55 @@ public class TicTacToeHashMap  {
     * @throws NoSuchFieldException
     * @throws IllegalAccessException
     */
-   private int numInPortion(double start, double end) throws NoSuchFieldException, IllegalAccessException {
-	   int num = 0;
-	   int s = (int) (start * capacity());
-	   int e = (int) (end * capacity());
-	   
-	   Field tableField = HashMap.class.getDeclaredField("table");
-	   tableField.setAccessible(true);
-	   Object[] table = (Object[]) tableField.get(winners);
-	   
-	   int cap = capacity();
-	   
-	   for(int i = s; i < e; i++) {
-		   if(table[i] != null) {
-			   num++;
-			   Class cls = table[i].getClass();
-			   Field tField = cls.getDeclaredField("next");
-			   tField.setAccessible(true);
-			   Object t = tField.get(table[i]);
-			   
-			   while(t != null) {
+	private int numInPortion(double start, double end) throws NoSuchFieldException, IllegalAccessException {
+		   int num = 0;
+		   int s = (int) (start * capacity());
+		   int e = (int) (end * capacity());
+		   
+		   Field tableField = HashMap.class.getDeclaredField("table");
+		   tableField.setAccessible(true);
+		   Object[] table = (Object[]) tableField.get(winners);
+		   
+		   int cap = capacity();
+		   
+		   for(int i = s; i < e; i++) {
+			   if(table[i] != null) {
 				   num++;
-				   Class cls2 = t.getClass();
-				   Field tField2 = cls2.getDeclaredField("next");
-				   tField2.setAccessible(true);
-				   t = tField2.get(t);
+				   Class cls = table[i].getClass();
+				   Field tField = cls.getDeclaredField("next");
+				   Field hsh = cls.getDeclaredField("hash");
+				   Field ky = cls.getDeclaredField("key");
+				   
+				   ky.setAccessible(true);
+				   Object key = ky.get(table[i]);
+				   
+				   hsh.setAccessible(true);
+				   hsh.set(table[i], 1);
+				   
+				   tField.setAccessible(true);
+				   Object t = tField.get(table[i]);
+				   
+				   while(t != null) {
+					   num++;
+					   Class cls2 = t.getClass();
+					   Field tField2 = cls2.getDeclaredField("next");
+					   tField2.setAccessible(true);
+					   t = tField2.get(t);
+				   }
 			   }
 		   }
+		   
+		   return num;
 	   }
-	   
-	   return num;
-   }
    
-   /**
-    * finds the total number of collisions in a portion of winners
-    * @param start the starting index
-    * @param end the ending index
-    * @return the total number of collisions between start and end
-    * @throws NoSuchFieldException
-    * @throws IllegalAccessException
-    */
+	   /**
+	    * finds the total number of collisions in a portion of winners
+	    * @param start the starting index
+	    * @param end the ending index
+	    * @return the total number of collisions between start and end
+	    * @throws NoSuchFieldException
+	    * @throws IllegalAccessException
+	    */
    private int numCollisionsInPortion(double start, double end) throws NoSuchFieldException, IllegalAccessException {
 	   int numCollisions = 0;
 	   int s = (int) (start * capacity());
@@ -192,13 +202,11 @@ public class TicTacToeHashMap  {
 	   return chains;
    }
    
-   
-   
    public static void main(String[] args) throws java.io.FileNotFoundException,
                                               NoSuchFieldException, 
                                               IllegalAccessException {
 
-      TicTacToeHashMap m = new TicTacToeHashMap();
+      TicTacToeMyHashMap m = new TicTacToeMyHashMap();
 
 	   String input = "TicTacToeWinners.txt";
 		File inputFile = new File(input);
@@ -212,7 +220,9 @@ public class TicTacToeHashMap  {
 		}
 		
 		while(inputScanner.hasNextLine()) {
-			String s = inputScanner.nextLine();
+			m.currentString = inputScanner.nextLine();
+			NewString s = new NewString(m.currentString);
+			
 			m.winners.put(s, true);
 		}
 		

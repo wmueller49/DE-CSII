@@ -1,3 +1,10 @@
+/**
+ * @author William Mueller
+ * DE CSII
+ * TicTacToeHashCode
+ * 3/16/2020
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -5,31 +12,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-/**
- * @author William Mueller
- * DE CSII
- * 3/15/2020
- * TicTacToe Assignment
- *
- */
 public class TTT_HC {
 	
-	private Object[][] winners = new Object[8000][1];
+	//Field of all winners
+	private Object[][] winners;
 	private String currentString;
 
 	/**
-	 * 
+	 * default constructor instantiates winners
 	 */
 	public TTT_HC() {
-		
+		winners = new Object[8000][1];
 	}
 
+	/**
+	 * hashcode method for this class
+	 * @return the index for the current string
+	 */
 	public int tttHashCode() {
 		int primeNum = 17;
 		int result = 1;
 		
 		for(int i = 0; i < 9; i++) {
-			result = i * result + ((Character)currentString.charAt(i)).hashCode();
+			result = i * result + ((int)currentString.charAt(i));
 		}
 		result *= primeNum;
 		
@@ -40,11 +45,7 @@ public class TTT_HC {
 		return result;
 	}
 	
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		TTT_HC h = new TTT_HC();
 		
 		String input = "TicTacToeWinners.txt";

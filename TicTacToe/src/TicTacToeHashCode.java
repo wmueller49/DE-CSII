@@ -1,22 +1,35 @@
+/**
+ * @author William Mueller
+ * DE CSII
+ * TicTacToeHashCode
+ * 3/16/2020
+ */
 
-//TODO Make sure you remove all of the TODO comments from this file before turning itin
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-
 public class TicTacToeHashCode extends Board {
 
-	boolean[] winners; // True if the hash string that maps to this index is a winner, false otherwise
-
+	/**
+	 * Field is either true or false, 
+	 * true at indexes where the hashcode of a tictactoe string is a winner
+	 * false where it is a loser
+	 */
+	boolean[] winners;
+	
 	TicTacToeHashCode(String s) {
 		super(s);
-      //TODO Instantiate winners array
 		winners = new boolean[19683];
 	}
 
+	
 	@Override
+	/**
+	 * Hashcode to place a board string in winners with no collisions
+	 * @return an int hashcode
+	 */
 	public int myHashCode() {
 		int result = 0;
 		int count = 0;
@@ -45,17 +58,21 @@ public class TicTacToeHashCode extends Board {
 	}
 
 	@Override
+	/**
+	 * @param s is the input string
+	 * @return whether s is a win or not
+	 */
 	public boolean isWin(String s) {
-      // TODO write an isWin method that takes in a String.  This should not change the board.  Board has an additional charAt 
-      // TODO method to facilitate this
 		this.setBoardString(s);
 		return winners[myHashCode()];
       }
       
 	@Override
+	/**
+	 * @return whether or not the current board string is a winner or not
+	 */
 	public boolean isWin() {
 		return winners[myHashCode()];
-      // TODO write an isWin method that uses boardString
       }
       
 	public static void main(String[] args) throws InterruptedException {
@@ -110,9 +127,7 @@ public class TicTacToeHashCode extends Board {
 		while (true) {
 			   board.displayRandomString();
 			   Thread.sleep(4000);
-		}
-		
-		
+		}		
 	}
 
 }

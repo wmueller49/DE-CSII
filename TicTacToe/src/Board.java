@@ -1,3 +1,10 @@
+/**
+ * @author William Mueller
+ * DE CSII
+ * TicTacToeHashCode
+ * 3/16/2020
+ */
+
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -17,19 +24,35 @@ abstract class Board extends JFrame implements ActionListener {
 
 	private String boardString = "";
 
+	/**
+	 * creates a board with a title and sets up the frame
+	 * @param title the title of the board
+	 */
 	public Board(String title) {
 		super(title);
 		setupFrame();
 	}
 
+	/**
+	 * sets the label on the screen to the inputted hashcode
+	 * @param hashcode the number to be the label
+	 */
 	public void setHashCodeLabel(int hashcode) {
 		lblHashCode.setText("" + hashcode);
 	}
 
+	/**
+	 * sets the label on the screen to say if the shown board is a winner or not
+	 * @param result to be the label
+	 */
 	public void setWinnerLabel(String result) {
 		lblWinTitle.setText(result);
 	}
 
+	/**
+	 * sets the label to be a winner or loser
+	 * @param result is true if the board is a winner, false if not
+	 */
 	public void setWinnerLabel(boolean result) {
 		if (result)
 			setWinnerLabel("Winner");
@@ -56,6 +79,10 @@ abstract class Board extends JFrame implements ActionListener {
 		return panel;
 	}
 
+	/**
+	 * Creates a JPanel to show a certain board string
+	 * @return the panel that is created
+	 */
 	private JPanel setupPanelTwo() {
 		JButton b;
 		JPanel panel = new JPanel();
@@ -88,6 +115,11 @@ abstract class Board extends JFrame implements ActionListener {
 		return panel;
 	}
 
+	/**
+	 * allows the user to switch between the three characters in the UI
+	 * @param ch the given character
+	 * @return the next char to switch to
+	 */
 	private static char cycleValue(char ch) {
 		switch (ch) {
 		case 'x':
@@ -99,6 +131,9 @@ abstract class Board extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * sets up the frame's size and visibility
+	 */
 	private void setupFrame() {
 		JPanel panel2 = new JPanel();
 
@@ -116,6 +151,10 @@ abstract class Board extends JFrame implements ActionListener {
 		super.setVisible(true);
 	}
 
+	/**
+	 * returns a random charcter
+	 * @return a random character, 'x', 'o', or ' '
+	 */
 	private char randomXO() {
 		int rnd = (int) (Math.random() * TicTacToe.CHAR_POSSIBILITIES);
 		switch (rnd) {
@@ -134,6 +173,12 @@ abstract class Board extends JFrame implements ActionListener {
 
 	abstract boolean isWin();
 
+	/**
+	 * returns a character at a row and column
+	 * @param row the row of the character
+	 * @param col the column of a character
+	 * @return the character at the given row, col
+	 */
 	public char charAt(int row, int col) {
 		String value = buttons[row][col].getText();
 		if (value.length() > 0)
@@ -142,6 +187,13 @@ abstract class Board extends JFrame implements ActionListener {
 			return '*';
 	}
    
+	/**
+	 * returns a character at a row and column
+	 * @param s the string to search through
+	 * @param row the row of the character
+	 * @param col the column of the character
+	 * @return the character at the given row, col in s
+	 */
    public char charAt(String s, int row, int col) {
      int pos = row * TicTacToe.COLS + col;
      if (s.length() >= pos)
@@ -150,6 +202,10 @@ abstract class Board extends JFrame implements ActionListener {
        return '*';   
    }
 
+   /**
+    * shows a certain character
+    * @param s the string to be shown
+    */
 	public void show(String s) {
 		int pos = 0;
 		String letter;
@@ -174,6 +230,9 @@ abstract class Board extends JFrame implements ActionListener {
 			}
 	}
 
+	/**
+	 * resets the board string
+	 */
 	public void resetBoardString() {
    boardString = "";
 		for (int r = 0; r < TicTacToe.ROWS; r++)
@@ -182,15 +241,26 @@ abstract class Board extends JFrame implements ActionListener {
 			}
 	}
 
+	/**
+	 * sets the board string to a given string
+	 * @param s the string to replace the current board string
+	 */
 	public void setBoardString(String s) {
 		boardString = s;
 		show(s);
 	}
 
+	/**
+	 * gets the current board string
+	 * @return the current board string
+	 */
 	public String getBoardString() {
 		return boardString;
 	}
 
+	/**
+	 * makes and displays a random string on the board
+	 */
 	public void displayRandomString() {
 		boardString = "";
 		for (int r = 0; r < TicTacToe.ROWS; r++)
