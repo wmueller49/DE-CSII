@@ -1,0 +1,13 @@
+My implementation:
+Average wait time of priority 0: 6
+Average wait time of priority 1: 216
+Average wait time of priority 2: 615
+Average wait time of priority 3: 926
+Average wait time of priority 4: 1248
+
+PriorityQueue's Heap Implementation:
+Average wait time of heap priority 0: 6
+Average wait time of heap priority 1: 270
+Average wait time of heap priority 2: 586
+Average wait time of heap priority 3: 904
+Average wait time of heap priority 4: 1233
