@@ -14,26 +14,39 @@ public class SudokuSolver {
 	 */
 	public SudokuSolver(ArrayList<ArrayList<SudokuSquare>> startBoard) {
 		sudoku = new SudokuGrid();
+		int count = 0;
 		
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
-				sudoku.fill(i, j, new SudokuGrid(startBoard.get(i)));
+				sudoku.fill(i, j, new SudokuGrid(startBoard.get(count)));
+				count++;
 			}
 		}
 	}
 	
-	public boolean solve() {
-		//Base case
-		
+	public boolean baseCase() {
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				if(sudoku.get(i, j) instanceof SudokuGrid) {
 					SudokuGrid checkGrid = (SudokuGrid) sudoku.get(i, j);
 					if(checkGrid.checkBox(-1)) {
-						return true;
+						
+					}
+					else {
+						return false;
 					}
 				}
 			}
+		}
+		
+		return true;
+	}
+	
+	public boolean solve() {
+		//Base case
+		
+		if(baseCase()) {
+			return true;
 		}
 		
 		//Recursive case
@@ -55,7 +68,7 @@ public class SudokuSolver {
 								}
 								else {
 									for(int k = 1; k < 10; k++) {
-										if(checkGrid.checkBox(k) && sudoku.checkCol(i, j, c, k) && sudoku.checkRow(i,  j, r, k)) {
+										if(checkGrid.checkBox(k) && sudoku.checkCol(j, c, k) && sudoku.checkRow(i, r, k)) {
 											currentSquare.setValue(k);
 											if(solve()) {
 												return true;
@@ -155,8 +168,9 @@ public class SudokuSolver {
 		
 		
 		System.out.println(board.toString());
-		System.out.println(board.solve());
-		System.out.println(board.toString());
+		System.out.println("----");
+		//System.out.println(board.solve());
+		//System.out.println(board.toString());
 	}
 
 }

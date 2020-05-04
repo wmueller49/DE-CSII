@@ -101,14 +101,20 @@ public class SudokuGrid {
 		return grid.get(r).get(c);
 	}
 	
-	public boolean checkRow(int r1, int c, int r2, int n) {
-		if(get(r1, c) instanceof SudokuGrid) {
-			SudokuGrid checkGrid = (SudokuGrid) get(r1, c);
-			return checkGrid.checkRow(r2, n);
+	public boolean checkRow(int r1, int r2, int n) {
+		for(int c = 0; c < 3; c++) {
+			if(get(r1, c) instanceof SudokuGrid) {
+				SudokuGrid checkGrid = (SudokuGrid) get(r1, c);
+				
+				if(checkGrid.checkRow(r2, n)) {
+					
+				}
+				else {
+					return false;
+				}
+			}
 		}
-		else {
-			return false;
-		}
+		return true;
 	}
 	
 	public boolean checkRow(int r, int n) {
@@ -125,14 +131,20 @@ public class SudokuGrid {
 		return true;
 	}
 	
-	public boolean checkCol(int r, int c1, int c2, int n) {
-		if(get(r, c1) instanceof SudokuGrid) {
-			SudokuGrid checkGrid = (SudokuGrid) get(r, c1);
-			return checkGrid.checkCol(c2, n);
+	public boolean checkCol(int c1, int c2, int n) {
+		for(int r = 0; r < 3; r++) {
+			if(get(r, c1) instanceof SudokuGrid) {
+				SudokuGrid checkGrid = (SudokuGrid) get(r, c1);
+				
+				if(checkGrid.checkCol(c2, n)) {
+					
+				}
+				else {
+					return false;
+				}
+			}
 		}
-		else {
-			return false;
-		}
+		return true;
 	}
 	
 	public boolean checkCol(int c, int n) {
