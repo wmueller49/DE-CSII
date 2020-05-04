@@ -42,7 +42,7 @@ public class SudokuSolver {
 		return true;
 	}
 	
-	public boolean solve() {
+	public boolean solve(int a, int b) {
 		//Base case
 		
 		if(baseCase()) {
@@ -50,8 +50,8 @@ public class SudokuSolver {
 		}
 		
 		//Recursive case
-		for(int i = 0; i < 3; i++) {
-			for(int j = 0; j < 3; j++) {
+		for(int i = a; i < 3; i++) {
+			for(int j = b; j < 3; j++) {
 				
 				if(sudoku.get(i, j) instanceof SudokuGrid) {
 					SudokuGrid checkGrid = (SudokuGrid) sudoku.get(i, j);
@@ -70,7 +70,7 @@ public class SudokuSolver {
 									for(int k = 1; k < 10; k++) {
 										if(checkGrid.checkBox(k) && sudoku.checkCol(j, c, k) && sudoku.checkRow(i, r, k)) {
 											currentSquare.setValue(k);
-											if(solve()) {
+											if(solve(i, j)) {
 												return true;
 											}
 										}
@@ -169,8 +169,8 @@ public class SudokuSolver {
 		
 		System.out.println(board.toString());
 		System.out.println("----");
-		//System.out.println(board.solve());
-		//System.out.println(board.toString());
+		System.out.println(board.solve(0, 0));
+		System.out.println(board.toString());
 	}
 
 }
