@@ -42,7 +42,7 @@ public class SudokuSolver {
 		return true;
 	}
 	
-	public boolean solve(int a, int b) {
+	public boolean solve() {
 		//Base case
 		
 		if(baseCase()) {
@@ -50,8 +50,8 @@ public class SudokuSolver {
 		}
 		
 		//Recursive case
-		for(int i = a; i < 3; i++) {
-			for(int j = b; j < 3; j++) {
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
 				
 				if(sudoku.get(i, j) instanceof SudokuGrid) {
 					SudokuGrid checkGrid = (SudokuGrid) sudoku.get(i, j);
@@ -70,7 +70,8 @@ public class SudokuSolver {
 									for(int k = 1; k < 10; k++) {
 										if(checkGrid.checkBox(k) && sudoku.checkCol(j, c, k) && sudoku.checkRow(i, r, k)) {
 											currentSquare.setValue(k);
-											if(solve(i, j)) {
+											
+											if(solve()) {
 												return true;
 											}
 										}
@@ -143,6 +144,7 @@ public class SudokuSolver {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
 		String box1 = "__84295_1";
 		String box2 = "___7__9_8";
 		String box3 = "962185_7_";
@@ -152,6 +154,19 @@ public class SudokuSolver {
 		String box7 = "__4____1_";
 		String box8 = "67_8__5__";
 		String box9 = "_316___2_";
+		
+		
+		/**
+		String box1 = "118429511";
+		String box2 = "111711918";
+		String box3 = "962185171";
+		String box4 = "112111711";
+		String box5 = "117281396";
+		String box6 = "411151118";
+		String box7 = "114111111";
+		String box8 = "671811511";
+		String box9 = "131611121";
+		**/
 		
 		ArrayList<String> startingBoxes = new ArrayList<String>();
 		startingBoxes.add(0, box1);
@@ -165,11 +180,10 @@ public class SudokuSolver {
 		startingBoxes.add(8, box9);
 		
 		SudokuSolver board = new SudokuSolver(generateStartBoard(startingBoxes));
-		
-		
-		System.out.println(board.toString());
+
+		System.out.println(board.toString());		
 		System.out.println("----");
-		System.out.println(board.solve(0, 0));
+		System.out.println(board.solve());
 		System.out.println(board.toString());
 	}
 
