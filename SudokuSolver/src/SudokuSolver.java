@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 
 public class SudokuSolver{	
 
@@ -306,9 +307,22 @@ public class SudokuSolver{
 		
 		board.b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!(board.isRunning)) {
-					board.solve();
-				}
+				
+				SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>(){
+					public Void doInBackground() {
+						if(!(board.isRunning)) {
+							board.solve();
+						}
+						return null;
+					}
+					
+					protected void done() {
+						board.b.setText("Solved");
+					}
+				};
+				
+				board.b.setText("Solving...");
+				worker.execute();
 			}
 		});
 		
