@@ -18,6 +18,7 @@ public class SudokuSquare extends JPanel{
 	private boolean flag;
 	
 	private boolean defaultNum;
+	private boolean isSolved;
 	private int value;
 
 	/**
@@ -25,15 +26,18 @@ public class SudokuSquare extends JPanel{
 	 */
 	public SudokuSquare() {
 		defaultNum = false;
+		isSolved = false;
 	}
 	
 	public SudokuSquare(boolean b) {
 		defaultNum = b;
+		isSolved = false;
 	}
 	
 	public SudokuSquare(boolean b, int v) {
 		defaultNum = b;
 		value = v;
+		isSolved = false;
 	}
 	
 	public int getValue() {
@@ -42,6 +46,10 @@ public class SudokuSquare extends JPanel{
 	
 	public boolean isDefaultNum() {
 		return defaultNum;
+	}
+	
+	public void setSolved(boolean b) {
+		isSolved = b;
 	}
 	
 	public void setValue(int v) {
@@ -60,8 +68,7 @@ public class SudokuSquare extends JPanel{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.setFont(new Font("TimesRoman", Font.PLAIN, FONTSIZE));
-		g.setColor(Color.black);
+		g.setFont(new Font("Helvetica", Font.BOLD, FONTSIZE));
 		this.setBackground(backgroundColor);
 		
 		if(getValue() == -1) {
@@ -72,6 +79,16 @@ public class SudokuSquare extends JPanel{
             g.drawString(value, x, y);
 		}
 		else {
+			if(isSolved) {
+				g.setColor(Color.decode("#329932"));
+			}
+			else if(defaultNum) {
+				g.setColor(Color.decode("#ff4c4c"));
+			}
+			else {
+				g.setColor(Color.black);
+			}
+			
 			int x = (this.getWidth() / 2) - FONTSIZE/4; // - letter.length()/2;
             int y = (this.getHeight() / 2) + FONTSIZE/4;
             String value = getValue() + "";

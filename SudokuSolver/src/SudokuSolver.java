@@ -5,25 +5,32 @@
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class SudokuSolver {
+public class SudokuSolver implements ActionListener{	
+
+	private final int ROWS = 9;
+
+	private final int COLS = 9;   	
+
+	private final int HEIGHT = 100*ROWS;
+
+	private final int WIDTH = 100*COLS;
 	
-
-	private static final int ROWS = 9;
-
-	private static final int COLS = 9;   	
-
-	private static final int HEIGHT = 120*ROWS;
-
-	private static final int WIDTH = 120*COLS;
+	private JFrame window;
 	
-	private static JFrame window;
+	private JPanel container;
+	private JPanel sudokuPanel;
+	private JPanel buttonPanel;
 	
-	private static JPanel p;
+	private JButton b;
 	
 
 	private SudokuGrid sudoku;
@@ -36,8 +43,8 @@ public class SudokuSolver {
 		window.setSize(new Dimension(WIDTH, HEIGHT));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		p = new JPanel();
-		p.setLayout(new GridLayout(ROWS,COLS));
+		sudokuPanel = new JPanel();
+		sudokuPanel.setLayout(new GridLayout(ROWS,COLS));
 		
 		sudoku = new SudokuGrid();
 		int count = 0;
@@ -59,7 +66,7 @@ public class SudokuSolver {
 					for(int c2 = 0; c2 < 3; c2++) {
 						if(currentGrid.get(r%3, c2) instanceof SudokuSquare) {
 							SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r%3, c2);
-							p.add(currentSquare);
+							sudokuPanel.add(currentSquare);
 						}
 					}
 					
@@ -67,8 +74,21 @@ public class SudokuSolver {
 			}
 		}
 		
+		buttonPanel = new JPanel();
+		buttonPanel.setPreferredSize(new Dimension(100, 100));
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
 		
-		window.add(p);
+		b = new JButton("Solve");
+		buttonPanel.add(b);
+		
+		container = new JPanel();
+		container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+		
+		container.add(sudokuPanel);
+		container.add(buttonPanel);
+		
+		window.add(container);
+		
 		window.setVisible(true);
 	}
 	
@@ -122,9 +142,8 @@ public class SudokuSolver {
 											
 											updateBoard(i, j, r, c);
 											
-											//return solve();//not sure how this fixes things
-											
 											if(solve()) {
+												updateBoard();
 												return true;
 											}
 											
@@ -170,6 +189,29 @@ public class SudokuSolver {
 		return startBoard;
 	}
 	
+	public void updateBoard() {
+		for(int i = 0; i < 3; i++) {
+			for(int j = 0; j < 3; j++) {
+				if(sudoku.get(i, j) instanceof SudokuGrid) {
+					SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
+					
+					for(int r = 0; r < 3; r++) {
+						for(int c = 0; c < 3; c++) {
+							if(currentGrid.get(r, c) instanceof SudokuSquare) {
+								SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
+								currentSquare.setSolved(true);
+								currentSquare.repaint();
+							}
+						}
+					}	
+				}	
+			}
+		}
+		sudokuPanel.repaint();
+		buttonPanel.repaint();
+		container.repaint();
+	}
+	
 	public void updateBoard(int i, int j, int r, int c) {
 		if(sudoku.get(i, j) instanceof SudokuGrid) {
 			SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
@@ -178,10 +220,12 @@ public class SudokuSolver {
 				currentSquare.repaint();
 			}
 		}
-		p.repaint();
+		sudokuPanel.repaint();
+		buttonPanel.repaint();
+		container.repaint();
 		
 		try {
-			Thread.sleep(500);
+			Thread.sleep(250);
 		}
 		catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();
@@ -215,7 +259,7 @@ public class SudokuSolver {
 		}
 		return result;
 	}
-
+	
 	/**
 	 * @param args
 	 */
@@ -256,12 +300,13 @@ public class SudokuSolver {
 		
 		SudokuSolver board = new SudokuSolver(generateStartBoard(startingBoxes));
 		
-		System.out.println(board.toString());		
-		System.out.println("----");
-		System.out.println(board.solve());
-		System.out.println("----");
-		System.out.println(board.toString());
+		board.b.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//System.out.println(board.solve());
+			}
+		});
 		
+		board.solve();
 		
 	}
 
