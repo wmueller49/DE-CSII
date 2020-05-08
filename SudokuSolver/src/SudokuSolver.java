@@ -34,11 +34,13 @@ public class SudokuSolver{
 	
 
 	private SudokuGrid sudoku;
+	private boolean isRunning;
 	
 	/**
 	 * 
 	 */
 	public SudokuSolver(ArrayList<ArrayList<SudokuSquare>> startBoard) {
+		isRunning = false;
 		window = new JFrame("Sudoku");
 		window.setSize(new Dimension(WIDTH, HEIGHT));
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -111,6 +113,7 @@ public class SudokuSolver{
 	}
 	
 	public boolean solve() {
+		isRunning = true;
 		//Base case
 		
 		if(baseCase()) {
@@ -144,6 +147,7 @@ public class SudokuSolver{
 											
 											if(solve()) {
 												updateBoard();
+												isRunning = false;
 												return true;
 											}
 											
@@ -224,14 +228,13 @@ public class SudokuSolver{
 		buttonPanel.repaint();
 		container.repaint();
 		
-		/**
 		try {
 			Thread.sleep(250);
 		}
 		catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
-		*/
+		
 	}
 	
 	public String toString() {
@@ -303,7 +306,9 @@ public class SudokuSolver{
 		
 		board.b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				board.solve();
+				if(!(board.isRunning)) {
+					board.solve();
+				}
 			}
 		});
 		
