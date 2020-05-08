@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class SudokuSolver implements ActionListener{	
+public class SudokuSolver{	
 
 	private final int ROWS = 9;
 
@@ -224,13 +224,14 @@ public class SudokuSolver implements ActionListener{
 		buttonPanel.repaint();
 		container.repaint();
 		
+		/**
 		try {
 			Thread.sleep(250);
 		}
 		catch(InterruptedException ex) {
 			Thread.currentThread().interrupt();
 		}
-		
+		*/
 	}
 	
 	public String toString() {
@@ -302,11 +303,11 @@ public class SudokuSolver implements ActionListener{
 		
 		board.b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(board.solve());
+				board.solve();
 			}
 		});
 		
-		board.solve();
+		//board.solve();
 		
 	}
 
