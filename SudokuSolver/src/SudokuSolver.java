@@ -111,13 +111,11 @@ public class SudokuSolver {
 							if(checkGrid.get(r, c) instanceof SudokuSquare) {
 								
 								SudokuSquare currentSquare = (SudokuSquare) checkGrid.get(r, c);
-								System.out.println(currentSquare);
 								
 								if(currentSquare.isDefaultNum() || currentSquare.getValue() != -1) {
 									
 								}
 								else {
-									System.out.println("Worked");
 									for(int k = 1; k < 10; k++) {
 										if(checkGrid.checkBox(k) && sudoku.checkCol(j, c, k) && sudoku.checkRow(i, r, k)) {
 											currentSquare.setValue(k);
@@ -257,29 +255,13 @@ public class SudokuSolver {
 		startingBoxes.add(8, box9);
 		
 		SudokuSolver board = new SudokuSolver(generateStartBoard(startingBoxes));
-		/**
-		if(board.sudoku.get(0, 1) instanceof SudokuGrid) {
-			SudokuGrid grid = (SudokuGrid) board.sudoku.get(0, 1);
-			
-			if(grid.get(1, 2) instanceof SudokuSquare) {
-				SudokuSquare s = (SudokuSquare) grid.get(1, 2);
-				System.out.println(s.isDefaultNum());
-				System.out.println(s.getValue() != -1);
-				System.out.println(s.isDefaultNum() || s.getValue() != -1);
-			}
-		}
-		**/
 		
-		//board.solve();
-		System.out.println(board.toString());	
-		
-		/**
 		System.out.println(board.toString());		
 		System.out.println("----");
 		System.out.println(board.solve());
 		System.out.println("----");
 		System.out.println(board.toString());
-		**/
+		
 		
 	}
 
