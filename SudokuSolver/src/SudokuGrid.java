@@ -102,19 +102,18 @@ public class SudokuGrid {
 	}
 	
 	public boolean checkRow(int r1, int r2, int n) {
+		
 		for(int c = 0; c < 3; c++) {
 			if(get(r1, c) instanceof SudokuGrid) {
 				SudokuGrid checkGrid = (SudokuGrid) get(r1, c);
 				
-				if(checkGrid.checkRow(r2, n)) {
-					
-				}
-				else {
+				if(!(checkGrid.checkRow(r2, n))) {
 					return false;
 				}
 			}
 		}
 		return true;
+		
 	}
 	
 	public boolean checkRow(int r, int n) {
@@ -132,14 +131,12 @@ public class SudokuGrid {
 	}
 	
 	public boolean checkCol(int c1, int c2, int n) {
+		
 		for(int r = 0; r < 3; r++) {
 			if(get(r, c1) instanceof SudokuGrid) {
 				SudokuGrid checkGrid = (SudokuGrid) get(r, c1);
 				
-				if(checkGrid.checkCol(c2, n)) {
-					
-				}
-				else {
+				if(!(checkGrid.checkCol(c2, n))) {
 					return false;
 				}
 			}
@@ -175,6 +172,22 @@ public class SudokuGrid {
 		}
 		
 		return true;
+	}
+	
+	public String toString() {
+		String result = "";
+		
+		for(int r = 0; r < 3; r++) {
+			for(int c = 0; c < 3; c++) {
+				if(this.get(r, c) instanceof SudokuSquare) {
+					SudokuSquare currentSquare = (SudokuSquare) this.get(r, c);
+					result += currentSquare.getValue() + " ";
+				}
+			}
+			result += "\n";
+		}
+		
+		return result;
 	}
 	
 	/**

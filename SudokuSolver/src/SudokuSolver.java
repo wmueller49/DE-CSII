@@ -3,9 +3,28 @@
  *
  */
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 public class SudokuSolver {
+	
+
+	private static final int ROWS = 9;
+
+	private static final int COLS = 9;   	
+
+	private static final int HEIGHT = 120*ROWS;
+
+	private static final int WIDTH = 120*COLS;
+	
+	private static JFrame window;
+	
+	private static JPanel p;
+	
 
 	private SudokuGrid sudoku;
 	
@@ -13,6 +32,13 @@ public class SudokuSolver {
 	 * 
 	 */
 	public SudokuSolver(ArrayList<ArrayList<SudokuSquare>> startBoard) {
+		window = new JFrame("Sudoku");
+		window.setSize(new Dimension(WIDTH, HEIGHT));
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		p = new JPanel();
+		p.setLayout(new GridLayout(ROWS,COLS));
+		
 		sudoku = new SudokuGrid();
 		int count = 0;
 		
@@ -22,6 +48,28 @@ public class SudokuSolver {
 				count++;
 			}
 		}
+		
+		
+		for(int r = 0; r < 9; r++) {
+			for(int c = 0; c < 3; c++) {
+				if(sudoku.get(r/3, c) instanceof SudokuGrid) {
+					SudokuGrid currentGrid = (SudokuGrid) sudoku.get(r/3, c);
+					
+					
+					for(int c2 = 0; c2 < 3; c2++) {
+						if(currentGrid.get(r%3, c2) instanceof SudokuSquare) {
+							SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r%3, c2);
+							p.add(currentSquare);
+						}
+					}
+					
+				}
+			}
+		}
+		
+		
+		window.add(p);
+		window.setVisible(true);
 	}
 	
 	public boolean baseCase() {
@@ -48,6 +96,7 @@ public class SudokuSolver {
 		if(baseCase()) {
 			return true;
 		}
+	
 		
 		//Recursive case
 		for(int i = 0; i < 3; i++) {
@@ -62,21 +111,29 @@ public class SudokuSolver {
 							if(checkGrid.get(r, c) instanceof SudokuSquare) {
 								
 								SudokuSquare currentSquare = (SudokuSquare) checkGrid.get(r, c);
+								System.out.println(currentSquare);
 								
 								if(currentSquare.isDefaultNum() || currentSquare.getValue() != -1) {
 									
 								}
 								else {
+									System.out.println("Worked");
 									for(int k = 1; k < 10; k++) {
 										if(checkGrid.checkBox(k) && sudoku.checkCol(j, c, k) && sudoku.checkRow(i, r, k)) {
 											currentSquare.setValue(k);
 											
+											updateBoard(i, j, r, c);
+											
+											//return solve();//not sure how this fixes things
+											
 											if(solve()) {
 												return true;
 											}
+											
 										}
 									}
 									currentSquare.setValue(-1);
+									return false;
 								}
 							}
 						}
@@ -100,17 +157,38 @@ public class SudokuSolver {
 				String stringNum = currentString.substring(start, end);
 				
 				if(stringNum.equals("_")) {
-					currentList.add(new SudokuSquare(false, -1));
+					SudokuSquare currentSquare = new SudokuSquare(false, -1);
+					currentList.add(currentSquare);
 				}
 				else {
 					int num = Integer.parseInt(stringNum);
-					currentList.add(new SudokuSquare(true, num));
+					SudokuSquare currentSquare = new SudokuSquare(true, num);
+					currentList.add(currentSquare);
 				}
 			}
 			startBoard.add(i, currentList);
 		}
 		
 		return startBoard;
+	}
+	
+	public void updateBoard(int i, int j, int r, int c) {
+		if(sudoku.get(i, j) instanceof SudokuGrid) {
+			SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
+			if(currentGrid.get(r, c) instanceof SudokuSquare) {
+				SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
+				currentSquare.repaint();
+			}
+		}
+		p.repaint();
+		
+		try {
+			Thread.sleep(500);
+		}
+		catch(InterruptedException ex) {
+			Thread.currentThread().interrupt();
+		}
+		
 	}
 	
 	public String toString() {
@@ -155,7 +233,6 @@ public class SudokuSolver {
 		String box8 = "67_8__5__";
 		String box9 = "_316___2_";
 		
-		
 		/**
 		String box1 = "118429511";
 		String box2 = "111711918";
@@ -180,11 +257,30 @@ public class SudokuSolver {
 		startingBoxes.add(8, box9);
 		
 		SudokuSolver board = new SudokuSolver(generateStartBoard(startingBoxes));
-
+		/**
+		if(board.sudoku.get(0, 1) instanceof SudokuGrid) {
+			SudokuGrid grid = (SudokuGrid) board.sudoku.get(0, 1);
+			
+			if(grid.get(1, 2) instanceof SudokuSquare) {
+				SudokuSquare s = (SudokuSquare) grid.get(1, 2);
+				System.out.println(s.isDefaultNum());
+				System.out.println(s.getValue() != -1);
+				System.out.println(s.isDefaultNum() || s.getValue() != -1);
+			}
+		}
+		**/
+		
+		//board.solve();
+		System.out.println(board.toString());	
+		
+		/**
 		System.out.println(board.toString());		
 		System.out.println("----");
 		System.out.println(board.solve());
+		System.out.println("----");
 		System.out.println(board.toString());
+		**/
+		
 	}
 
 }
