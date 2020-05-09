@@ -64,11 +64,15 @@ public class SudokuSolver{
       }   	
       for(int r = 0; r < 9; r++) {
          for(int c = 0; c < 3; c++) {
-            SudokuGrid currentGrid = (SudokuGrid) sudoku.get(r/3, c);
+            if(sudoku.get(r/3, c) instanceof SudokuGrid) {
+               SudokuGrid currentGrid = (SudokuGrid) sudoku.get(r/3, c);
             	      	
-            for(int c2 = 0; c2 < 3; c2++) {
-               SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r%3, c2);
-               sudokuPanel.add(currentSquare);
+               for(int c2 = 0; c2 < 3; c2++) {
+                  if(currentGrid.get(r%3, c2) instanceof SudokuSquare) {
+                     SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r%3, c2);
+                     sudokuPanel.add(currentSquare);
+                  }
+               }
             }
          }
       }
@@ -108,12 +112,14 @@ public class SudokuSolver{
    public boolean baseCase() {
       for(int i = 0; i < 3; i++) {
          for(int j = 0; j < 3; j++) {
-            SudokuGrid checkGrid = (SudokuGrid) sudoku.get(i, j);
-            if(checkGrid.checkBox(-1)) {
+            if(sudoku.get(i, j) instanceof SudokuGrid) {
+               SudokuGrid checkGrid = (SudokuGrid) sudoku.get(i, j);
+               if(checkGrid.checkBox(-1)) {
                	
-            }
-            else {
-               return false;
+               }
+               else {
+                  return false;
+               }
             }
          }
       }
@@ -132,36 +138,41 @@ public class SudokuSolver{
       for(int i = 0; i < 3; i++) {
          for(int j = 0; j < 3; j++) {
          	
-            SudokuGrid checkGrid = (SudokuGrid) sudoku.get(i, j);
+            if(sudoku.get(i, j) instanceof SudokuGrid) {
+               SudokuGrid checkGrid = (SudokuGrid) sudoku.get(i, j);
             	
-            for(int r = 0; r < 3; r++) {
-               for(int c = 0; c < 3; c++) {
+               for(int r = 0; r < 3; r++) {
+                  for(int c = 0; c < 3; c++) {
                   	
-                  SudokuSquare currentSquare = (SudokuSquare) checkGrid.get(r, c);
+                     if(checkGrid.get(r, c) instanceof SudokuSquare) {
                      	
-                  if(currentSquare.isDefaultNum() || currentSquare.getValue() != -1) {
-                        	
-                  }
-                  else {
-                     for(int k = 1; k < 10; k++) {
-                        if(checkGrid.checkBox(k) && sudoku.checkCol(j, c, k) && sudoku.checkRow(i, r, k)) {
-                           currentSquare.setValue(k);
+                        SudokuSquare currentSquare = (SudokuSquare) checkGrid.get(r, c);
+                     	
+                        if(currentSquare.isDefaultNum() || currentSquare.getValue() != -1) {                        	
+                        }
+                        else {
+                           for(int k = 1; k < 10; k++) {
+                              if(checkGrid.checkBox(k) && sudoku.checkCol(j, c, k) && sudoku.checkRow(i, r, k)) {
+                                 currentSquare.setValue(k);
                               	
-                           updateBoard(i, j, r, c);
+                                 updateBoard(i, j, r, c);
                               	
-                           if(solve()) {
-                              updateBoard();
-                              return true;
-                           }                            	
+                                 if(solve()) {
+                                    updateBoard();
+                                    return true;
+                                 }                            	
+                              }
+                           }
+                           currentSquare.setValue(-1);
+                           return false;
                         }
                      }
-                     currentSquare.setValue(-1);
-                     return false;
                   }
-               }
-            }           	
+               }           	
+            }
          }
-      } 	
+      }
+   	
       return false;
    }
 	
@@ -193,23 +204,31 @@ public class SudokuSolver{
    public void updateBoard() {
       for(int i = 0; i < 3; i++) {
          for(int j = 0; j < 3; j++) {
-            SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
+            if(sudoku.get(i, j) instanceof SudokuGrid) {
+               SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
             	
-            for(int r = 0; r < 3; r++) {
-               for(int c = 0; c < 3; c++) {
-                  SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
-                  currentSquare.setSolved(true);
-                  currentSquare.repaint();
-               }
+               for(int r = 0; r < 3; r++) {
+                  for(int c = 0; c < 3; c++) {
+                     if(currentGrid.get(r, c) instanceof SudokuSquare) {
+                        SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
+                        currentSquare.setSolved(true);
+                        currentSquare.repaint();
+                     }
+                  }
+               }	
             }	
-         }	
+         }
       }
    }
 	
    public void updateBoard(int i, int j, int r, int c) {
-      SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
-      SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
-      currentSquare.repaint();
+      if(sudoku.get(i, j) instanceof SudokuGrid) {
+         SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
+         if(currentGrid.get(r, c) instanceof SudokuSquare) {
+            SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
+            currentSquare.repaint();
+         }
+      }
       pause();
    }
    
@@ -219,8 +238,7 @@ public class SudokuSolver{
       }
       catch(InterruptedException ex) {
          Thread.currentThread().interrupt();
-      }
-   
+      }  
    }
 	
    public String toString() {
@@ -228,17 +246,21 @@ public class SudokuSolver{
    	
       for(int i = 0; i < 3; i++) {
          for(int j = 0; j < 3; j++) {
+            if(sudoku.get(i, j) instanceof SudokuGrid) {
             	
-            SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
+               SudokuGrid currentGrid = (SudokuGrid) sudoku.get(i, j);
             	
-            for(int r = 0; r < 3; r++) {
-               for(int c = 0; c < 3; c++) {
-                  SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
-                  result += currentSquare.toString();
-                  result += " ";
+               for(int r = 0; r < 3; r++) {
+                  for(int c = 0; c < 3; c++) {
+                     if(currentGrid.get(r, c) instanceof SudokuSquare) {
+                        SudokuSquare currentSquare = (SudokuSquare) currentGrid.get(r, c);
+                        result += currentSquare.toString();
+                     }
+                     result += " ";
+                  }
+                  result += "\n";
                }
-               result += "\n";
-            }            
+            }
             result += "\n";
          }
          result += "\n";
